@@ -4,20 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-
-const carouselItems = [{}];
-
-const cards = [
-  {
-    src: "/images/products/sofa4.jpg",
-  },
-  {
-    src: "/images/products/sofa4.jpg",
-  },
-  {
-    src: "/images/products/sofa4.jpg",
-  },
-];
+import { carouselItems, cards1, cards2, departments } from "@/data";
 
 export default function Home() {
   return (
@@ -33,70 +20,65 @@ export default function Home() {
             autoPlay={true}
             interval={5000}
           >
-            <div>
-              <img src="/images/carousel-item-1.png"></img>
-            </div>
-            <div>
-              <img src="/images/carousel-item-2.png"></img>
-            </div>
-            <div>
-              <img src="/images/carousel-item-1.png"></img>
-            </div>
+            {carouselItems.map((item) => (
+              <div>
+                <img src={item.src}></img>
+              </div>
+            ))}
           </Carousel>
 
           <div className="w-[51.5%] flex flex-col space-y-[4.5%]">
-            <Image
-              alt="sofa4"
-              src={"/images/products/sofa4.jpg"}
-              width="0"
-              height="0"
-              sizes="100vw"
-              className="w-full h-auto rounded-[10px]"
-            ></Image>
-            <Image
-              alt="sofa4"
-              src={"/images/products/sofa4.jpg"}
-              width="0"
-              height="0"
-              sizes="100vw"
-              className="w-full h-auto rounded-[10px]"
-            ></Image>
+            {cards1.map((card, index) => (
+              <Link href={""}>
+                <Image
+                  alt={`card${index}`}
+                  src={card.src}
+                  width="0"
+                  height="0"
+                  sizes="100vw"
+                  className="w-full h-auto rounded-[10px]"
+                ></Image>
+              </Link>
+            ))}
           </div>
         </div>
         <div className="flex w-full flex">
-          <Link
-            href={"/home"}
-            className="rounded-[10px] overflow-hidden border-[2px] p-[10px] border-[#ffffff] hover:border-[#7f7f7f]"
-          >
-            <Image
-              alt="sofa4"
-              src={"/images/products/sofa4.jpg"}
-              width="0"
-              height="0"
-              sizes="100vw"
-              className="w-full h-auto rounded-[10px] "
-            ></Image>
-          </Link>
-          <Link href={"/home"}>
-            <Image
-              alt="sofa4"
-              src={"/images/products/sofa4.jpg"}
-              width="0"
-              height="0"
-              sizes="100vw"
-              className="w-full h-auto rounded-[10px] border-[2px] p-[10px] border-[#ffffff]"
-            ></Image>
-          </Link>
-          <Link href={"/home"}>
-            <Image
-              alt="sofa4"
-              src={"/images/products/sofa4.jpg"}
-              width="0"
-              height="0"
-              sizes="100vw"
-              className="w-full h-auto rounded-[10px] border-[2px] p-[10px] border-[#ffffff]"
-            ></Image>
-          </Link>
+          {cards2.map((card, index) => (
+            <Link
+              href={"/"}
+              className="rounded-[10px] overflow-hidden border-[1px] p-[10px] border-[#ffffff] hover:border-[#7f7f7f]"
+            >
+              <Image
+                alt={`card${index}`}
+                src={card.src}
+                width="0"
+                height="0"
+                sizes="100vw"
+                className="w-full h-auto rounded-[10px] "
+              ></Image>
+            </Link>
+          ))}
+        </div>
+
+        <div className="flex flex-col items-center space-y-[20px]">
+          <h2 className="text-[30px] text-[#000000] font-[800]">
+            Shop by Department
+          </h2>
+          <div className="w-full flex flex-wrap">
+            {departments.map((department, index) => (
+              <Link
+                href={"/"}
+                className="w-[20%] rounded-[10px] overflow-hidden border-[1px] p-[10px] border-[#ffffff] hover:border-[#7f7f7f]"
+              >
+                <div className="flex flex-col items-center">
+                  <img src={department.image} className="rounded-[10px]"></img>
+                  <p className="text-center text-[#000000] pt-[10px]">
+                    {department.label}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </main>
