@@ -33,7 +33,11 @@ export default function ProductsPage() {
             All Products
           </button>
           {departments.map((department) => (
-            <button value={department.department} onClick={clickHandler}>
+            <button
+              key={`button${department.label}`}
+              value={department.department}
+              onClick={clickHandler}
+            >
               {department.label}
             </button>
           ))}
@@ -41,7 +45,10 @@ export default function ProductsPage() {
       </div>
       <div className="w-full flex py-6 px-10 flex flex-wrap">
         {filteredProducts.map((product) => (
-          <div className="w-[33.3%] p-2 border-[1px] rounded-[10px] border-[#ffffff] hover:border-[#7f7f7f] mb-[20px]">
+          <div
+            key={product.id}
+            className="w-[33.3%] p-2 border-[1px] rounded-[10px] border-[#ffffff] hover:border-[#7f7f7f] mb-[20px]"
+          >
             <Link href={`products/${product.id}`}>
               <img src={product.image} className="rounded-[10px]"></img>
               <div className="pt-[10px] text-[#000000]">
@@ -54,7 +61,7 @@ export default function ProductsPage() {
                 </p>
               </div>
             </Link>
-            <button className="flex items-center space-x-[10px] bg-[#30628B] text-[#ffffff] p-2 rounded-[10px]">
+            <button className="flex items-center space-x-[10px] bg-[#30628B] text-[#ffffff] p-2 rounded-[10px] hover:bg-[#4186BE]">
               <BiCartAdd></BiCartAdd>
               <p>Add to cart</p>
             </button>
