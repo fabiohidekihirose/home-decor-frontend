@@ -1,6 +1,4 @@
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { Providers } from "@/redux/provider";
 
 export const metadata = {
@@ -16,11 +14,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="overflow-auto">
       <body className="static">
-        <Providers>
-          <Navbar></Navbar>
-          {children}
-          <Footer></Footer>
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
