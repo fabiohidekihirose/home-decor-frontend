@@ -21,7 +21,6 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   cartReducer,
-  userReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

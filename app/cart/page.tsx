@@ -20,9 +20,9 @@ export default function Cart() {
   };
 
   return (
-    <div className="flex p-24 pt-28 space-x-[2%] text-[#000000] shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
+    <div className="flex p-24 pt-36 space-x-[2%] text-[#000000] shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
       <div className="w-[64%] space-y-[30px]">
-        <h2 className=" text-[40px] font-[500]">My Cart</h2>
+        <h2 className="text-[40px] font-[500]">My Cart</h2>
         <div className="space-y-[20px]">
           {cartItems.length
             ? cartItems.map((cartItem: ProductProps) => (
@@ -31,7 +31,7 @@ export default function Cart() {
             : "No items in Cart"}
         </div>
       </div>
-      <div className="w-[34%] p-6 rounded-[10px] space-y-[10px] shadow-[0_4px_30px_rgba(157,157,157,0.25)] h-[200px]">
+      <div className="w-[34%] p-6 rounded-[10px] space-y-[10px] shadow-[0_4px_30px_rgba(157,157,157,0.25)] h-min">
         <h2 className="text-[20px]">Order Summary</h2>
 
         <p className="font-[600] text-[25px]">

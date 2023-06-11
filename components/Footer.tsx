@@ -16,19 +16,39 @@ export default function Footer() {
       </div>
       <div className="w-[50%] flex flex-col space-y-[70px]">
         <div className="space-x-[20px] flex justify-end">
-          <Link href={""}>Home</Link>
-          <Link href={""}>Products</Link>
-          <Link href={""}>About</Link>
-          <Link href={""}>Contact</Link>
+          <Link href={""} className="hover:text-[#30628b]">
+            Home
+          </Link>
+          <Link href={"/products"} className="hover:text-[#30628b]">
+            Products
+          </Link>
+          <Link href={"/about-us"} className="hover:text-[#30628b]">
+            About
+          </Link>
+          <Link href={""} className="hover:text-[#30628b]">
+            Contact
+          </Link>
         </div>
         <div className="flex space-x-[20px] justify-end">
-          <a target="_blank" href="https://www.instagram.com/">
+          <a
+            target="_blank"
+            href="https://www.instagram.com/"
+            className="hover:text-[#30628b]"
+          >
             <BsInstagram size={30}></BsInstagram>
           </a>
-          <a target="_blank" href="https://www.twitter.com/">
+          <a
+            target="_blank"
+            href="https://www.twitter.com/"
+            className="hover:text-[#30628b]"
+          >
             <BsTwitter size={30}></BsTwitter>
           </a>
-          <a target="_blank" href="https://www.facebook.com/">
+          <a
+            target="_blank"
+            href="https://www.facebook.com/"
+            className="hover:text-[#30628b]"
+          >
             <BsFacebook size={30}></BsFacebook>
           </a>
         </div>

@@ -17,7 +17,7 @@ export default function Login() {
       </div>
       <div className="flex flex-col justify-center w-[30%]">
         <h1 className="m-auto text-[30px] my-[20px]">Login</h1>
-        <label className="mt-[15px]">Username</label>
+        <label className="mt-[15px]">Email</label>
         <InputField />
         <label className="mt-[15px]">Password</label>
         <InputField />

@@ -13,7 +13,7 @@ export default function CartItemCard({ cartItem }: CartItemCardProps) {
   const dispatch = useAppDispatch();
 
   return (
-    <div className="flex h-[220px] space-x-[20px] p-[20px] rounded-[10px] shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
+    <div className="flex h-[210px] space-x-[20px] p-[20px] rounded-[10px] shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
       <div className="w-[30%]">
         <img src={cartItem.image} className="rounded-[10px]"></img>
       </div>
