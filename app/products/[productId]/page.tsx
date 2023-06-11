@@ -1,9 +1,11 @@
 "use client";
 
 import { products } from "@/data";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import axios from "axios";
 import { BiCartAdd } from "react-icons/bi";
+import { ProductProps } from "@/types";
 
 export default function ProductPage({
   params,
@@ -11,7 +13,19 @@ export default function ProductPage({
   params: { productId: string };
 }) {
   const [quantity, setQuantity] = useState(1);
+  const [productInfo, setProductInfo] = useState<ProductProps | null>(null);
   const similarProducts = [products[0], products[0], products[0], products[0]];
+
+  const baseUrl = "http://localhost:8000";
+
+  useEffect(() => {
+    (async () => {
+      const productData = await axios.get(
+        `${baseUrl}/products/${params.productId}`
+      );
+      setProductInfo(productData.data);
+    })();
+  }, []);
 
   const plusHandler = () => {
     setQuantity((quantity) => quantity + 1);
@@ -22,35 +36,33 @@ export default function ProductPage({
   };
 
   return (
-    <div className="pt-28 p-24 flex flex-col space-y-[4%]">
+    <div className="pt-36 p-24 flex flex-col space-y-[4%] rounded-[10px] shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
       <div className="flex space-x-[3%]">
         <div className="w-[50%]">
-          <img
-            src="/images/departments/bedroom.jpg"
-            className="rounded-[10px]"
-          ></img>
+          <img src={productInfo?.image} className="rounded-[10px]"></img>
         </div>
         <div className="text-[#000000] w-[47%] space-y-[20px]">
-          <p className="text-[40px] font-[700]">{products[0].name}</p>
+          <p className="text-[40px] font-[700]">{productInfo?.name}</p>
           <p className="text-[40px]">
             ¥
-            {products[0].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            {productInfo?.price
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
           </p>
           <p>FREE shipping</p>
-          <div className="flex">
-            <div>
+          <div className="flex space-x-[20px] items-center">
+            <div className="flex w-[20%]">
               <button
-                className="border-[1px] border-[#000000] p-4 rounded-l-[10px]"
+                className="border-[1px] border-[#000000] p-2 rounded-l-[10px] hover:bg-[#30628b] hover:text-[#ffffff]"
                 onClick={minusHandler}
               >
                 -
               </button>
-              <input
-                className="text-center py-4 border-[1px] border-[#000000] w-[40%]"
-                defaultValue={quantity}
-              ></input>
+              <div className="text-center p-2 border-[1px] border-[#000000] w-[40%]">
+                {quantity}
+              </div>
               <button
-                className="border-[1px] border-[#000000] p-4 rounded-r-[10px]"
+                className="border-[1px] border-[#000000] p-2 rounded-r-[10px] hover:bg-[#30628b] hover:text-[#ffffff]"
                 onClick={plusHandler}
               >
                 +
@@ -62,34 +74,7 @@ export default function ProductPage({
           </div>
           <div className="space-y-[2%]">
             <p className="text-[20px]">Description</p>
-            <p>
-              The sofa is a beautifully designed and comfortable piece of
-              furniture that serves as a centerpiece in any living space. It
-              features a modern and sleek design, blending seamlessly with
-              various interior styles, from contemporary to traditional. Crafted
-              with meticulous attention to detail, the sofa boasts a sturdy
-              wooden frame, ensuring durability and stability for years to come.
-              Its high-quality upholstery is made from a plush and soft fabric,
-              providing a luxurious feel and inviting comfort. The sofa offers
-              generous seating space, allowing multiple individuals to relax and
-              unwind together. The cushions are generously padded, striking the
-              perfect balance between support and coziness. The backrest
-              provides excellent lumbar support, promoting a comfortable sitting
-              posture and minimizing fatigue. With its thoughtful design, the
-              sofa offers versatility and functionality. It may include
-              additional features like adjustable headrests, reclining
-              mechanisms, or built-in storage compartments, enhancing the
-              overall convenience and user experience. The color palette of the
-              sofa is carefully selected, ranging from neutral tones to vibrant
-              hues, enabling it to complement various color schemes and personal
-              preferences. Its clean lines and elegant silhouette create an
-              inviting and sophisticated atmosphere in any room. Whether it's
-              for hosting guests, lounging while watching a movie, or simply
-              enjoying a quiet evening, this sofa provides a cozy haven for
-              relaxation and socializing. It's a perfect blend of style,
-              comfort, and functionality, making it an essential and captivating
-              addition to any living space.
-            </p>
+            <p>{productInfo?.description}</p>
           </div>
         </div>
       </div>
@@ -100,6 +85,7 @@ export default function ProductPage({
         <div className="flex text-[#000000]">
           {similarProducts.map((product) => (
             <Link
+              key={product.id}
               href={`products/${product.id}`}
               className="w-[25%] p-2 border-[1px] rounded-[10px] border-[#ffffff] hover:border-[#7f7f7f] mb-[20px]"
             >

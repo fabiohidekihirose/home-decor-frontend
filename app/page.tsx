@@ -4,32 +4,51 @@ import Image from "next/image";
 import Link from "next/link";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { carouselItems, cards1, cards2, departments } from "@/data";
+import { carouselItems, cards1, cards2 } from "@/data";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { DepartmentProps } from "@/types";
 
 export default function Home() {
+  const [departments, setDepartments] = useState([]);
+  const baseUrl = "http://localhost:8000";
+
+  useEffect(() => {
+    (async () => {
+      const departmentsData = await axios.get(`${baseUrl}/departments`);
+      const departmentsSorted = departmentsData.data.sort(
+        (a: DepartmentProps, b: DepartmentProps) => a.id - b.id
+      );
+      setDepartments(departmentsSorted);
+    })();
+  });
+
   return (
-    <main className="flex flex-col items-center justify-between p-24 pt-28">
+    <main className="flex flex-col items-center justify-between p-24 pt-36 shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
       <div className="w-full space-y-[50px]">
-        <div className="flex space-x-[1.8%]">
+        <div className="flex w-full space-x-[1.5%]">
           <Carousel
             infiniteLoop={true}
             showArrows={true}
-            className="w-[100%] rounded-[10px] overflow-hidden"
+            className="w-full rounded-[10px] overflow-hidden m-[10px]"
             showThumbs={false}
             showStatus={false}
             autoPlay={true}
             interval={5000}
           >
             {carouselItems.map((item) => (
-              <div>
+              <Link href={item.url} className="hover:cursor-auto">
                 <img src={item.src}></img>
-              </div>
+              </Link>
             ))}
           </Carousel>
 
-          <div className="w-[51.5%] flex flex-col space-y-[4.5%]">
+          <div className="w-[51.5%] flex flex-col space-y-[3.2%]">
             {cards1.map((card, index) => (
-              <Link href={""}>
+              <Link
+                href={""}
+                className="rounded-[10px] overflow-hidden border-[1px] p-[10px] border-[#ffffff] hover:border-[#9d9e9f] hover:shadow-[0_4px_30px_rgba(157,157,157,0.25)]"
+              >
                 <Image
                   alt={`card${index}`}
                   src={card.src}
@@ -42,11 +61,11 @@ export default function Home() {
             ))}
           </div>
         </div>
-        <div className="flex w-full flex">
+        <div className="flex w-full">
           {cards2.map((card, index) => (
             <Link
               href={"/"}
-              className="rounded-[10px] overflow-hidden border-[1px] p-[10px] border-[#ffffff] hover:border-[#7f7f7f]"
+              className="rounded-[10px] overflow-hidden border-[1px] p-[10px] border-[#ffffff] hover:border-[#9d9e9f] hover:shadow-[0_4px_30px_rgba(157,157,157,0.25)]"
             >
               <Image
                 alt={`card${index}`}
@@ -65,10 +84,13 @@ export default function Home() {
             Shop by Department
           </h2>
           <div className="w-full flex flex-wrap">
-            {departments.map((department, index) => (
+            {departments.map((department: DepartmentProps) => (
               <Link
-                href={"/"}
-                className="w-[20%] rounded-[10px] overflow-hidden border-[1px] p-[10px] border-[#ffffff] hover:border-[#7f7f7f]"
+                href={{
+                  pathname: `/products`,
+                  query: { department: department.department },
+                }}
+                className="w-[20%] rounded-[10px] overflow-hidden border-[1px] p-[10px] border-[#ffffff] hover:border-[#9d9e9f] hover:shadow-[0_4px_30px_rgba(157,157,157,0.25)]"
               >
                 <div className="flex flex-col items-center">
                   <img src={department.image} className="rounded-[10px]"></img>
