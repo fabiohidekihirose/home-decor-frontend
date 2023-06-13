@@ -50,6 +50,7 @@ export default function Navbar() {
       <div className="flex justify-around">
         {departments.map((department: DepartmentProps) => (
           <Link
+            key={department.id}
             href={{
               pathname: `/products`,
               query: { department: department.department },
