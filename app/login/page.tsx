@@ -1,9 +1,40 @@
+"use client";
+
 import InputField from "@/components/InputField";
 import Button from "@/components/Button";
 import Link from "next/link";
 import { BiArrowBack } from "react-icons/bi";
+import { useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
+  const router = useRouter();
+
+  const baseUrl = "http://localhost:8000";
+
+  const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const submitHandler = async (event: React.FormEvent) => {
+    event.preventDefault();
+    try {
+      await axios.post(`${baseUrl}/login`, formData, {
+        withCredentials: true,
+      });
+
+      setError("");
+
+      router.push("/account");
+    } catch (error: any) {
+      setError(error.response.data);
+    }
+  };
+
   return (
     <div className="flex mx-auto space-x-[10%] h-[100vh]">
       <div className="w-[40%] bg-[#30628b] flex flex-col space-y-[190px] text-[#ffffff] px-[60px]">
@@ -15,18 +46,32 @@ export default function Login() {
           Copyright 2023. All Rights Reserved
         </div>
       </div>
-      <div className="flex flex-col justify-center w-[30%]">
+      <form
+        className="flex flex-col justify-center w-[30%]"
+        onSubmit={submitHandler}
+      >
         <h1 className="m-auto text-[30px] my-[20px]">Login</h1>
         <label className="mt-[15px]">Email</label>
-        <InputField />
+        <InputField
+          type="email"
+          name="email"
+          changeHandler={changeHandler}
+          required={true}
+        />
         <label className="mt-[15px]">Password</label>
-        <InputField />
+        <InputField
+          type="password"
+          name="password"
+          changeHandler={changeHandler}
+          required={true}
+        />
         <Link
           href={"/forgot-password"}
           className="underline hover:text-[#30628b]"
         >
           Forgot Your Password?
         </Link>
+        {error && <p className="text-[#FF0000] mt-[10px]">{error}</p>}
         <Button text={"Login"} className="my-[30px]" />
         <div className="flex space-x-[5px]">
           <p>Do not have a HomeDecor account yet?</p>
@@ -34,7 +79,7 @@ export default function Login() {
             Sign up
           </Link>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
