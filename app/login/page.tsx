@@ -7,11 +7,14 @@ import { BiArrowBack } from "react-icons/bi";
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/redux/hooks";
+import { setCredentials } from "@/redux/slicers/authSlice";
 
 export default function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
   const baseUrl = "http://localhost:8000";
 
@@ -23,14 +26,19 @@ export default function Login() {
   const submitHandler = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      await axios.post(`${baseUrl}/login`, formData, {
-        withCredentials: true,
-      });
+      const userData = await axios.post(`${baseUrl}/login`, formData);
 
+      dispatch(
+        setCredentials({
+          user: userData.data.id,
+          token: userData.data.accessToken,
+        })
+      );
       setError("");
 
       router.push("/account");
     } catch (error: any) {
+      console.log(error);
       setError(error.response.data);
     }
   };

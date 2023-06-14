@@ -5,7 +5,7 @@ import axios from "axios";
 import Link from "next/link";
 import { BiCartAdd } from "react-icons/bi";
 import { useAppDispatch } from "@/redux/hooks";
-import { addToCart } from "@/redux/slicers/cart/slicers";
+import { addToCart } from "@/redux/slicers/cartSlice";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ProductProps, DepartmentProps } from "@/types";
 

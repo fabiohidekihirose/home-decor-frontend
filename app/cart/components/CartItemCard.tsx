@@ -5,7 +5,7 @@ import {
   incrementInCart,
   decrementInCart,
   removeItem,
-} from "@/redux/slicers/cart/slicers";
+} from "@/redux/slicers/cartSlice";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { CartItemCardProps } from "@/types";
 
