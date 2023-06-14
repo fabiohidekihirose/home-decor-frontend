@@ -6,9 +6,11 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { RiAccountCircleLine, RiShoppingCart2Line } from "react-icons/ri";
 import { DepartmentProps } from "@/types";
+import AccountMenu from "./AccountMenu";
 
 export default function Navbar() {
   const [departments, setDepartments] = useState([]);
+  const [showAccountMenu, setShowAccountMenu] = useState(false);
 
   const baseUrl = "http://localhost:8000";
 
@@ -22,6 +24,14 @@ export default function Navbar() {
     })();
   });
 
+  const mouseOverHandler = () => {
+    setShowAccountMenu(true);
+  };
+
+  const mouseOutHandler = () => {
+    setShowAccountMenu(false);
+  };
+
   return (
     <div className="fixed space-y-[10px] w-full py-[10px] z-50 bg-[#ffffff] border-b-[1px] shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
       <div className="flex items-center space-x-[2%] w-full border-b-[1px]">
@@ -32,12 +42,20 @@ export default function Navbar() {
         ></input>
         <div className="flex items-center absolute right-[50px]">
           <Link
-            href={"/login"}
+            href={"/account"}
             className="ml-[20px] flex flex-col items-center hover:text-[#30628b] text-[#000000]"
+            onMouseOver={mouseOverHandler}
+            onMouseOut={mouseOutHandler}
           >
             <RiAccountCircleLine size={25} />
             <div>Account</div>
           </Link>
+          {showAccountMenu && (
+            <AccountMenu
+              mouseOverHandler={mouseOverHandler}
+              mouseOutHandler={mouseOutHandler}
+            />
+          )}
           <Link
             href={"/cart"}
             className="ml-[30px] flex flex-col items-center hover:text-[#30628b] text-[#000000]"
@@ -47,7 +65,7 @@ export default function Navbar() {
           </Link>
         </div>
       </div>
-      <div className="flex justify-around">
+      <div className="flex space-x-[2%] flex-wrap">
         {departments.map((department: DepartmentProps) => (
           <Link
             key={department.id}
