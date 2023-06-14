@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import userReducer from "./slicers/user/slicers";
-import { cartReducer } from "./slicers/cart/slicers";
+import { cartReducer } from "./slicers/cartSlice";
+import { apiSlice } from "./api/apiSlice";
+import authReducer from "./slicers/authSlice";
 import storage from "redux-persist/lib/storage";
 import {
   persistStore,
@@ -16,11 +17,13 @@ import {
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["cartReducer"],
+  whitelist: ["cartReducer", "auth"],
 };
 
 const rootReducer = combineReducers({
   cartReducer,
+  auth: authReducer,
+  [apiSlice.reducerPath]: apiSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -32,7 +35,7 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).concat(apiSlice.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
