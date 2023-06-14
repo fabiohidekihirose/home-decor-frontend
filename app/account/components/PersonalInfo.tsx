@@ -1,7 +1,8 @@
 import InputField from "@/components/InputField";
 import axios from "axios";
-import { headers } from "next/dist/client/components/headers";
 import { useEffect, useState } from "react";
+import { useAppSelector } from "@/redux/hooks";
+import { selectCurrentToken } from "@/redux/slicers/authSlice";
 
 export default function PersonalInfo() {
   const [formData, setFormData] = useState({
@@ -11,16 +12,21 @@ export default function PersonalInfo() {
     address: "",
     mobile: "",
   });
+  const token = useAppSelector(selectCurrentToken);
 
   const baseUrl = "http://localhost:8000";
 
   useEffect(() => {
-    // (async () => {
-    //   const personalInfo = await axios.get(`${baseUrl}/profile`, headers: {
-    //     authorization: "token"
-    //   });
-    // })();
+    (async () => {
+      const personalInfo = await axios.get(`${baseUrl}/profile`, {
+        headers: {
+          Authorization: token,
+        },
+      });
+      setFormData(personalInfo.data);
+    })();
   }, []);
+
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
