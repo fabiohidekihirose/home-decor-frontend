@@ -31,7 +31,7 @@ export default function SignUp() {
     event.preventDefault();
 
     try {
-      await axios.post(`${baseUrl}/users`, formData);
+      await axios.post(`${baseUrl}/users/sign-up`, formData);
       setError("");
 
       router.push("/login");

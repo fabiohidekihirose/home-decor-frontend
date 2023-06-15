@@ -15,22 +15,27 @@ export const carouselItems = [
 
 export const cards1 = [
   {
-    src: "/images/products/sofa4.jpg",
+    src: "/images/banners/banner-1.png",
+    url: "/products?department=store-organization",
   },
   {
-    src: "/images/products/sofa4.jpg",
+    src: "/images/banners/banner-2.png",
+    url: "/products?department=outdoor",
   },
 ];
 
 export const cards2 = [
   {
-    src: "/images/products/sofa4.jpg",
+    src: "/images/banners/banner-3.png",
+    url: "/products?department=living-room",
   },
   {
-    src: "/images/products/sofa4.jpg",
+    src: "/images/banners/banner-4.png",
+    url: "/products?department=dining-room",
   },
   {
-    src: "/images/products/sofa4.jpg",
+    src: "/images/banners/banner-5.png",
+    url: "/products?department=bedroom",
   },
 ];
 

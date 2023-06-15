@@ -43,15 +43,15 @@ export default function Home() {
             ))}
           </Carousel>
 
-          <div className="w-[51.5%] flex flex-col space-y-[3.2%]">
-            {cards1.map((card, index) => (
+          <div className="w-[49.5%] flex flex-col space-y-[3.2%]">
+            {cards1.map((banner, index) => (
               <Link
-                href={""}
+                href={banner.url}
                 className="rounded-[10px] overflow-hidden border-[1px] p-[10px] border-[#ffffff] hover:border-[#9d9e9f] hover:shadow-[0_4px_30px_rgba(157,157,157,0.25)]"
               >
                 <Image
                   alt={`card${index}`}
-                  src={card.src}
+                  src={banner.src}
                   width="0"
                   height="0"
                   sizes="100vw"
@@ -62,14 +62,14 @@ export default function Home() {
           </div>
         </div>
         <div className="flex w-full">
-          {cards2.map((card, index) => (
+          {cards2.map((banner, index) => (
             <Link
-              href={"/"}
+              href={banner.url}
               className="rounded-[10px] overflow-hidden border-[1px] p-[10px] border-[#ffffff] hover:border-[#9d9e9f] hover:shadow-[0_4px_30px_rgba(157,157,157,0.25)]"
             >
               <Image
                 alt={`card${index}`}
-                src={card.src}
+                src={banner.src}
                 width="0"
                 height="0"
                 sizes="100vw"
