@@ -8,12 +8,12 @@ export const carouselItems = [
     url: "/products",
   },
   {
-    src: "/images/carousel-items/carousel-item-1.png",
-    url: "/products?department=special-offers",
+    src: "/images/carousel-items/carousel-item-3.png",
+    url: "/products",
   },
 ];
 
-export const cards1 = [
+export const banners1 = [
   {
     src: "/images/banners/banner-1.png",
     url: "/products?department=store-organization",
@@ -24,7 +24,7 @@ export const cards1 = [
   },
 ];
 
-export const cards2 = [
+export const banners2 = [
   {
     src: "/images/banners/banner-3.png",
     url: "/products?department=living-room",

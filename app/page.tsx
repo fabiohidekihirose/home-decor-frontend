@@ -4,14 +4,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { carouselItems, cards1, cards2 } from "@/data";
-import { useEffect, useState } from "react";
+import { carouselItems, banners1, banners2 } from "@/data";
+import { ReactNode, useEffect, useState } from "react";
 import axios from "axios";
 import { DepartmentProps } from "@/types";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [departments, setDepartments] = useState([]);
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+  const router = useRouter();
 
   useEffect(() => {
     (async () => {
@@ -30,27 +32,29 @@ export default function Home() {
           <Carousel
             infiniteLoop={true}
             showArrows={true}
-            className="w-full rounded-[10px] overflow-hidden m-[10px]"
+            className="w-full rounded-[10px] overflow-hidden m-[10px] hover:cursor-pointer"
             showThumbs={false}
             showStatus={false}
             autoPlay={true}
             interval={5000}
+            onClickItem={(index, item: any) => router.push(item?.props.href)}
           >
             {carouselItems.map((item) => (
-              <Link href={item.url} className="hover:cursor-auto">
+              <Link href={item.url} key={item.src}>
                 <img src={item.src}></img>
               </Link>
             ))}
           </Carousel>
 
           <div className="w-[49.5%] flex flex-col space-y-[3.2%]">
-            {cards1.map((banner, index) => (
+            {banners1.map((banner) => (
               <Link
+                key={banner.url}
                 href={banner.url}
                 className="rounded-[10px] overflow-hidden border-[1px] p-[10px] border-[#ffffff] hover:border-[#9d9e9f] hover:shadow-[0_4px_30px_rgba(157,157,157,0.25)]"
               >
                 <Image
-                  alt={`card${index}`}
+                  alt={`banner-${banner.src}`}
                   src={banner.src}
                   width="0"
                   height="0"
@@ -62,13 +66,14 @@ export default function Home() {
           </div>
         </div>
         <div className="flex w-full">
-          {cards2.map((banner, index) => (
+          {banners2.map((banner) => (
             <Link
+              key={banner.src}
               href={banner.url}
               className="rounded-[10px] overflow-hidden border-[1px] p-[10px] border-[#ffffff] hover:border-[#9d9e9f] hover:shadow-[0_4px_30px_rgba(157,157,157,0.25)]"
             >
               <Image
-                alt={`card${index}`}
+                alt={`banner-${banner.src}`}
                 src={banner.src}
                 width="0"
                 height="0"
@@ -86,6 +91,7 @@ export default function Home() {
           <div className="w-full flex flex-wrap">
             {departments.map((department: DepartmentProps) => (
               <Link
+                key={department.id}
                 href={{
                   pathname: `/products`,
                   query: { department: department.department },
