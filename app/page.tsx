@@ -11,7 +11,7 @@ import { DepartmentProps } from "@/types";
 
 export default function Home() {
   const [departments, setDepartments] = useState([]);
-  const baseUrl = "http://localhost:8000";
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
     (async () => {

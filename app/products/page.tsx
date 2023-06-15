@@ -20,8 +20,9 @@ export default function ProductsPage() {
   const searchParams = useSearchParams();
 
   const departmentInUrl = searchParams.get("department");
+  const searchInUrl = searchParams.get("search");
 
-  const baseUrl = "http://localhost:8000";
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
     (async () => {
@@ -43,12 +44,22 @@ export default function ProductsPage() {
           )
         );
         setCurrentDepartment(departmentInUrl);
+      } else if (searchInUrl) {
+        const productsList = await axios.get(
+          `${baseUrl}/products/search/${searchInUrl}`
+        );
+
+        if (productsList.data.length) {
+          setFilteredProducts(productsList.data);
+        } else {
+          setFilteredProducts([]);
+        }
       } else {
         setFilteredProducts(allProducts.data);
         setCurrentDepartment("all");
       }
     })();
-  }, [departmentInUrl]);
+  }, [departmentInUrl, filteredProducts]);
 
   const clickHandler = ({
     currentTarget,
@@ -75,7 +86,7 @@ export default function ProductsPage() {
 
   return (
     <div className="pt-36 flex shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
-      <div className="w-[30%] p-8 text-[#000000]">
+      <div className="w-[350px] p-8 text-[#000000]">
         <p className="font-[700] text-[24px]">Departments</p>
         <div className="flex flex-col items-start space-y-[10px] p-4">
           <button

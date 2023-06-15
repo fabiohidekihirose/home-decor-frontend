@@ -16,7 +16,7 @@ export default function Login() {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const baseUrl = "http://localhost:8000";
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;

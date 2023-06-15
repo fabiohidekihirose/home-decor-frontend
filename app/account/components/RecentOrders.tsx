@@ -3,7 +3,7 @@ import { useState } from "react";
 export default function RecentOrders() {
   const [orders, setOrders] = useState([]);
   return (
-    <div className="space-y-[20px]">
+    <div className="space-y-[20px] p-10 pt-4">
       <h3 className="text-[20px]">Recent Orders</h3>
       {orders.length ? (
         <div>

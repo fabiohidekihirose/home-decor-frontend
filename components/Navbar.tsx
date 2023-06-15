@@ -17,7 +17,7 @@ export default function Navbar() {
   const router = useRouter();
   const user = useAppSelector(selectCurrentUser);
 
-  const baseUrl = "http://localhost:8000";
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
     (async () => {

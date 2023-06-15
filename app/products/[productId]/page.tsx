@@ -16,7 +16,7 @@ export default function ProductPage({
   const [productInfo, setProductInfo] = useState<ProductProps | null>(null);
   const similarProducts = [products[0], products[0], products[0], products[0]];
 
-  const baseUrl = "http://localhost:8000";
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
     (async () => {

@@ -20,7 +20,7 @@ export default function SignUp() {
   const [error, setError] = useState("");
   const router = useRouter();
 
-  const baseUrl = "http://localhost:8000";
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
