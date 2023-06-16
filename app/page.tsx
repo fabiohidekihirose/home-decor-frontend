@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { carouselItems, banners1, banners2 } from "@/data";
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { DepartmentProps } from "@/types";
 import { useRouter } from "next/navigation";

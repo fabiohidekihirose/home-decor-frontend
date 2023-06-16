@@ -26,7 +26,6 @@ export default function ProductsPage() {
 
   useEffect(() => {
     (async () => {
-      const allProducts = await axios.get(`${baseUrl}/products`);
       const allDepartments = await axios.get(`${baseUrl}/departments`);
 
       setDepartmets(
@@ -34,15 +33,13 @@ export default function ProductsPage() {
           (a: DepartmentProps, b: DepartmentProps) => a.id - b.id
         )
       );
-      setAllProducts(allProducts.data);
 
       if (departmentInUrl) {
-        setFilteredProducts(
-          allProducts.data.filter(
-            (product: ProductProps) =>
-              product.department_name === departmentInUrl
-          )
+        const productsList = await axios.get(
+          `${baseUrl}/products/departments/${departmentInUrl}`
         );
+
+        setFilteredProducts(productsList.data[0].products);
         setCurrentDepartment(departmentInUrl);
       } else if (searchInUrl) {
         const productsList = await axios.get(
@@ -55,28 +52,18 @@ export default function ProductsPage() {
           setFilteredProducts([]);
         }
       } else {
-        setFilteredProducts(allProducts.data);
+        const allProductsList = await axios.get(`${baseUrl}/products`);
+
+        setFilteredProducts(allProductsList.data);
         setCurrentDepartment("all");
       }
     })();
-  }, [departmentInUrl, filteredProducts]);
+  }, [departmentInUrl]);
 
-  const clickHandler = ({
+  const clickHandler = async ({
     currentTarget,
   }: React.MouseEvent<HTMLButtonElement>) => {
-    let newProductsList;
-
-    if (currentTarget.value === "all") {
-      newProductsList = allProducts;
-    } else {
-      newProductsList = allProducts.filter(
-        (product: ProductProps) =>
-          product.department_name === currentTarget.value
-      );
-    }
-
-    setCurrentDepartment(currentTarget.value);
-    setFilteredProducts(newProductsList);
+    router.push(`/products?department=${currentTarget.value}`);
   };
 
   const addToCartHandler = (product: ProductProps) => {
