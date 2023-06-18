@@ -10,7 +10,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { ProductProps, DepartmentProps } from "@/types";
 
 export default function ProductsPage() {
-  const [allProducts, setAllProducts] = useState([]);
   const [departments, setDepartmets] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [currentDepartment, setCurrentDepartment] = useState("");
@@ -34,7 +33,12 @@ export default function ProductsPage() {
         )
       );
 
-      if (departmentInUrl) {
+      if (departmentInUrl === "all") {
+        const allProductsList = await axios.get(`${baseUrl}/products`);
+
+        setFilteredProducts(allProductsList.data);
+        setCurrentDepartment("all");
+      } else if (departmentInUrl) {
         const productsList = await axios.get(
           `${baseUrl}/products/departments/${departmentInUrl}`
         );
@@ -51,11 +55,6 @@ export default function ProductsPage() {
         } else {
           setFilteredProducts([]);
         }
-      } else {
-        const allProductsList = await axios.get(`${baseUrl}/products`);
-
-        setFilteredProducts(allProductsList.data);
-        setCurrentDepartment("all");
       }
     })();
   }, [departmentInUrl]);

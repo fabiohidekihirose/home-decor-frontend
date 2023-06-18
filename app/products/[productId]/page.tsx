@@ -6,6 +6,9 @@ import Link from "next/link";
 import axios from "axios";
 import { BiCartAdd } from "react-icons/bi";
 import { ProductProps } from "@/types";
+import { useAppDispatch } from "@/redux/hooks";
+import { useRouter } from "next/navigation";
+import { addToCart } from "@/redux/slicers/cartSlice";
 
 export default function ProductPage({
   params,
@@ -14,7 +17,9 @@ export default function ProductPage({
 }) {
   const [quantity, setQuantity] = useState(1);
   const [productInfo, setProductInfo] = useState<ProductProps | null>(null);
-  const similarProducts = [products[0], products[0], products[0], products[0]];
+  const [similarProducts, setSimilarProducts] = useState([]);
+  const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -23,7 +28,13 @@ export default function ProductPage({
       const productData = await axios.get(
         `${baseUrl}/products/${params.productId}`
       );
+
+      const similarProductsData = await axios.get(
+        `${baseUrl}/products/departments/${productData.data.department_name}`
+      );
+
       setProductInfo(productData.data);
+      setSimilarProducts(similarProductsData.data[0].products);
     })();
   }, []);
 
@@ -33,6 +44,11 @@ export default function ProductPage({
 
   const minusHandler = () => {
     if (quantity > 1) setQuantity((quantity) => quantity - 1);
+  };
+
+  const addToCartHandler = (product: ProductProps) => {
+    dispatch(addToCart({ ...product, inCart: 0 }));
+    router.push("/cart");
   };
 
   return (
@@ -68,7 +84,10 @@ export default function ProductPage({
                 +
               </button>
             </div>
-            <button className="bg-[#30628b] text-[#ffffff] p-4 rounded-[10px] w-[50%] hover:bg-[#4186BE]">
+            <button
+              className="bg-[#30628b] text-[#ffffff] p-4 rounded-[10px] w-[50%] hover:bg-[#4186BE]"
+              onClick={() => addToCartHandler(product)}
+            >
               Add to cart
             </button>
           </div>
@@ -83,7 +102,7 @@ export default function ProductPage({
           Compare Similar Items
         </h2>
         <div className="flex text-[#000000]">
-          {similarProducts.map((product) => (
+          {similarProducts.map((product: ProductProps) => (
             <Link
               key={product.id}
               href={`products/${product.id}`}
@@ -99,7 +118,10 @@ export default function ProductPage({
                     .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                 </p>
               </div>
-              <button className="flex items-center space-x-[10px] bg-[#30628B] text-[#ffffff] p-2 rounded-[10px] hover:bg-[#4186BE]">
+              <button
+                className="flex items-center space-x-[10px] bg-[#30628B] text-[#ffffff] p-2 rounded-[10px] hover:bg-[#4186BE]"
+                onClick={() => addToCartHandler(product)}
+              >
                 <BiCartAdd></BiCartAdd>
                 <p>Add to cart</p>
               </button>
