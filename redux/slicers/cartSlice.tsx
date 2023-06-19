@@ -21,9 +21,9 @@ const cartSlice = createSlice({
       );
 
       if (item) {
-        item.inCart++;
+        item.inCart += action.payload.inCart;
       } else {
-        state.cart.push({ ...action.payload, inCart: 1 });
+        state.cart.push({ ...action.payload, inCart: action.payload.inCart });
       }
     },
 

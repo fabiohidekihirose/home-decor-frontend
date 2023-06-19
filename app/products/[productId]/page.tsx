@@ -16,7 +16,16 @@ export default function ProductPage({
   params: { productId: string };
 }) {
   const [quantity, setQuantity] = useState(1);
-  const [productInfo, setProductInfo] = useState<ProductProps | null>(null);
+  const [productInfo, setProductInfo] = useState<ProductProps>({
+    id: 0,
+    name: "",
+    department_name: "",
+    image: "",
+    price: 0,
+    quantity: 0,
+    description: "",
+    inCart: 0,
+  });
   const [similarProducts, setSimilarProducts] = useState([]);
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -46,8 +55,8 @@ export default function ProductPage({
     if (quantity > 1) setQuantity((quantity) => quantity - 1);
   };
 
-  const addToCartHandler = (product: ProductProps) => {
-    dispatch(addToCart({ ...product, inCart: 0 }));
+  const addToCartHandler = (product: ProductProps, add: number = 1) => {
+    dispatch(addToCart({ ...product, inCart: add }));
     router.push("/cart");
   };
 
@@ -86,7 +95,7 @@ export default function ProductPage({
             </div>
             <button
               className="bg-[#30628b] text-[#ffffff] p-4 rounded-[10px] w-[50%] hover:bg-[#4186BE]"
-              onClick={() => addToCartHandler(product)}
+              onClick={() => addToCartHandler(productInfo, quantity)}
             >
               Add to cart
             </button>

@@ -19,7 +19,10 @@ export default function Footer() {
           <Link href={""} className="hover:text-[#30628b]">
             Home
           </Link>
-          <Link href={"/products"} className="hover:text-[#30628b]">
+          <Link
+            href={{ pathname: "/products", query: { department: "all" } }}
+            className="hover:text-[#30628b]"
+          >
             Products
           </Link>
           <Link href={"/about-us"} className="hover:text-[#30628b]">
