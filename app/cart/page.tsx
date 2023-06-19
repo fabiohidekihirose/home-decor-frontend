@@ -3,9 +3,11 @@
 import { useAppSelector } from "@/redux/hooks";
 import { ProductProps } from "@/types";
 import CartItem from "./components/CartItemCard";
+import { useRouter } from "next/navigation";
 
 export default function Cart() {
   const cartItems = useAppSelector((state) => state.cartReducer.cart);
+  const router = useRouter();
 
   const getTotal = () => {
     let totalItems = 0;
@@ -40,7 +42,10 @@ export default function Cart() {
             .totalPrice.toString()
             .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
         </p>
-        <button className="bg-[#30628b] text-[#ffffff] p-4 rounded-[10px] hover:bg-[#4186BE] w-full">
+        <button
+          className="bg-[#30628b] text-[#ffffff] p-4 rounded-[10px] hover:bg-[#4186BE] w-full"
+          onClick={() => router.push("/checkout")}
+        >
           Procedure to checkout
         </button>
       </div>

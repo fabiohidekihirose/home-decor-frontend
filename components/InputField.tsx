@@ -4,6 +4,7 @@ interface InputFieldProps {
   changeHandler: React.ChangeEventHandler<HTMLInputElement>;
   required: boolean;
   defaultValue?: string;
+  maxLength?: number;
 }
 
 export default function InputField({
@@ -12,6 +13,7 @@ export default function InputField({
   changeHandler,
   required,
   defaultValue,
+  maxLength,
 }: InputFieldProps) {
   return (
     <input
@@ -21,6 +23,7 @@ export default function InputField({
       onChange={changeHandler}
       required={required ? true : false}
       defaultValue={defaultValue}
+      maxLength={maxLength ? maxLength : undefined}
     ></input>
   );
 }
