@@ -1,6 +1,5 @@
 "use client";
 
-import { products } from "@/data";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import axios from "axios";
