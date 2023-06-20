@@ -72,7 +72,7 @@ export default function ProductsPage() {
 
   return (
     <div className="pt-36 flex shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
-      <div className="w-[350px] p-8 text-[#000000]">
+      <div className="md:w-[350px] md:p-8 text-[#000000] max-md:hidden">
         <p className="font-[700] text-[24px]">Departments</p>
         <div className="flex flex-col items-start space-y-[10px] p-4">
           <button
@@ -102,11 +102,11 @@ export default function ProductsPage() {
           ))}
         </div>
       </div>
-      <div className="w-full flex py-6 px-10 flex flex-wrap">
+      <div className="w-full flex md:py-6 md:px-10 max-md:px-6 max-md:flex-col md:flex-wrap">
         {filteredProducts.map((product: ProductProps) => (
           <div
             key={product.id}
-            className="w-[33.3%] h-auto border-[1px] p-4 rounded-[10px] border-[#ffffff] hover:border-[#9d9e9f] mb-[20px] hover:shadow-[0_4px_30px_rgba(157,157,157,0.25)]"
+            className="md:w-[33.3%] h-auto border-[1px] p-4 rounded-[10px] border-[#ffffff] hover:border-[#9d9e9f] mb-[20px] hover:shadow-[0_4px_30px_rgba(157,157,157,0.25)]"
           >
             <Link href={`products/${product.id}`}>
               <img src={product.image} className="rounded-[10px]"></img>

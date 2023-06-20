@@ -26,13 +26,13 @@ export default function Home() {
   });
 
   return (
-    <main className="flex flex-col items-center justify-between p-24 pt-36 shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
-      <div className="w-full space-y-[50px]">
-        <div className="flex w-full space-x-[1.5%]">
+    <main className="flex flex-col items-center justify-between p-6 md:p-24 max-md:pt-36 md:pt-36 shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
+      <div className="w-full md:space-y-[50px] max-md:space-y-[20px]">
+        <div className="md:flex w-full md:space-x-[1.5%] max-md:space-y-[20px]">
           <Carousel
             infiniteLoop={true}
             showArrows={true}
-            className="w-full rounded-[10px] overflow-hidden m-[10px] hover:cursor-pointer"
+            className="w-full rounded-[10px] overflow-hidden md:m-[10px] hover:cursor-pointer"
             showThumbs={false}
             showStatus={false}
             autoPlay={true}
@@ -46,12 +46,12 @@ export default function Home() {
             ))}
           </Carousel>
 
-          <div className="w-[49.5%] flex flex-col space-y-[3.2%]">
+          <div className="md:w-[49.5%] flex flex-col md:space-y-[3.2%] max-md:space-y-[20px]">
             {banners1.map((banner) => (
               <Link
                 key={banner.url}
                 href={banner.url}
-                className="rounded-[10px] overflow-hidden border-[1px] p-[10px] border-[#ffffff] hover:border-[#9d9e9f] hover:shadow-[0_4px_30px_rgba(157,157,157,0.25)]"
+                className="rounded-[10px] overflow-hidden border-[1px] md:p-[10px] border-[#ffffff] hover:border-[#9d9e9f] hover:shadow-[0_4px_30px_rgba(157,157,157,0.25)]"
               >
                 <Image
                   alt={`banner-${banner.src}`}
@@ -65,12 +65,12 @@ export default function Home() {
             ))}
           </div>
         </div>
-        <div className="flex w-full">
+        <div className="flex max-md:flex-col w-full max-md:space-y-[20px]">
           {banners2.map((banner) => (
             <Link
               key={banner.src}
               href={banner.url}
-              className="rounded-[10px] overflow-hidden border-[1px] p-[10px] border-[#ffffff] hover:border-[#9d9e9f] hover:shadow-[0_4px_30px_rgba(157,157,157,0.25)]"
+              className="rounded-[10px] overflow-hidden border-[1px] md:p-[10px] border-[#ffffff] hover:border-[#9d9e9f] hover:shadow-[0_4px_30px_rgba(157,157,157,0.25)]"
             >
               <Image
                 alt={`banner-${banner.src}`}
@@ -96,7 +96,7 @@ export default function Home() {
                   pathname: `/products`,
                   query: { department: department.department },
                 }}
-                className="w-[20%] rounded-[10px] overflow-hidden border-[1px] p-[10px] border-[#ffffff] hover:border-[#9d9e9f] hover:shadow-[0_4px_30px_rgba(157,157,157,0.25)]"
+                className="max-md:w-[33%] md:w-[20%] rounded-[10px] overflow-hidden border-[1px] p-[10px] border-[#ffffff] hover:border-[#9d9e9f] hover:shadow-[0_4px_30px_rgba(157,157,157,0.25)]"
               >
                 <div className="flex flex-col items-center">
                   <img src={department.image} className="rounded-[10px]"></img>

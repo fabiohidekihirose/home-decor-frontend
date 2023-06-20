@@ -46,15 +46,15 @@ export default function Navbar() {
   };
 
   return (
-    <div className="fixed items-center flex flex-col space-y-[10px] w-full py-[10px] z-50 bg-[#ffffff] border-b-[1px] shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
-      <div className="flex items-center space-x-[2%] w-full border-b-[1px]">
+    <div className="fixed items-center flex flex-col space-y-[10px] w-full md:py-[10px] z-50 bg-[#ffffff] md:border-b-[1px] shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
+      <div className="flex max-md:flex-col max-md:mb-[20px] max-md:justify-center items-center md:space-x-[2%] w-full md:border-b-[1px]">
         <Logo />
         <input
           placeholder="Search for a product..."
-          className="w-[50%] h-[40px] rounded-[10px] p-4 border-[#30628b] border-[2px]"
+          className="max-md:w-[90%] w-[50%] h-[40px] rounded-[10px] p-4 border-[#30628b] border-[2px]"
           onKeyUp={pressEnterHandler}
         ></input>
-        <div className="flex items-center absolute right-[50px]">
+        <div className="flex items-center absolute right-[50px] max-md:hidden">
           <Link
             href={user ? "/account" : "/login"}
             className="ml-[20px] flex flex-col items-center hover:text-[#30628b] text-[#000000]"
@@ -79,7 +79,7 @@ export default function Navbar() {
           </Link>
         </div>
       </div>
-      <div className="flex space-x-[30px] flex-wrap mx-[min(20px)] justify-center">
+      <div className="md:flex space-x-[30px] flex-wrap mx-[min(20px)] justify-center hidden">
         {departments.map((department: DepartmentProps) => (
           <Link
             key={department.id}

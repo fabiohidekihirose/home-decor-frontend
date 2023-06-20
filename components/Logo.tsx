@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function Logo() {
   return (
     <Link href={"/"}>
-      <div className="flex items-center ml-[40px]">
+      <div className="flex items-center md:ml-[40px]">
         <Image
           src={"/images/home_decor_logo.png"}
           alt="logo"
