@@ -66,7 +66,7 @@ export default function ProductsPage() {
   };
 
   const addToCartHandler = (product: ProductProps) => {
-    dispatch(addToCart({ ...product, inCart: 0 }));
+    dispatch(addToCart({ ...product, inCart: 1 }));
     router.push("/cart");
   };
 
