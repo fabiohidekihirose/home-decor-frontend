@@ -13,6 +13,7 @@ export default function ProductsPage() {
   const [departments, setDepartmets] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [currentDepartment, setCurrentDepartment] = useState("");
+  const [currentDepartmentText, setCurrentDepartmentText] = useState("");
 
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -38,13 +39,20 @@ export default function ProductsPage() {
 
         setFilteredProducts(allProductsList.data);
         setCurrentDepartment("all");
+        setCurrentDepartmentText("All Products");
       } else if (departmentInUrl) {
         const productsList = await axios.get(
           `${baseUrl}/products/departments/${departmentInUrl}`
         );
 
+        const departmentName = allDepartments.data.find(
+          (department: DepartmentProps) =>
+            department.department === departmentInUrl
+        );
+
         setFilteredProducts(productsList.data[0].products);
         setCurrentDepartment(departmentInUrl);
+        setCurrentDepartmentText(departmentName.label);
       } else if (searchInUrl) {
         const productsList = await axios.get(
           `${baseUrl}/products/search/${searchInUrl}`
@@ -52,8 +60,15 @@ export default function ProductsPage() {
 
         if (productsList.data.length) {
           setFilteredProducts(productsList.data);
+
+          const departmentName = allDepartments.data.find(
+            (department: DepartmentProps) =>
+              department.department === searchInUrl
+          );
+          setCurrentDepartmentText(departmentName.label);
         } else {
           setFilteredProducts([]);
+          setCurrentDepartmentText("All Products");
         }
       }
     })();
@@ -72,7 +87,7 @@ export default function ProductsPage() {
 
   return (
     <div className="pt-36 flex shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
-      <div className="md:w-[350px] md:p-8 text-[#000000] max-md:hidden">
+      <div className="md:w-[385px] md:p-8 text-[#000000] max-md:hidden">
         <p className="font-[700] text-[24px]">Departments</p>
         <div className="flex flex-col items-start space-y-[10px] p-4">
           <button
@@ -102,33 +117,38 @@ export default function ProductsPage() {
           ))}
         </div>
       </div>
-      <div className="w-full flex md:py-6 md:px-10 max-md:px-6 max-md:flex-col md:flex-wrap">
-        {filteredProducts.map((product: ProductProps) => (
-          <div
-            key={product.id}
-            className="md:w-[33.3%] h-auto border-[1px] p-4 rounded-[10px] border-[#ffffff] hover:border-[#9d9e9f] mb-[20px] hover:shadow-[0_4px_30px_rgba(157,157,157,0.25)]"
-          >
-            <Link href={`products/${product.id}`}>
-              <img src={product.image} className="rounded-[10px]"></img>
-              <div className="pt-[10px] text-[#000000]">
-                <p className="text-[18px]">{product.name}</p>
-                <p className="text-[24px]">
-                  ¥
-                  {product.price
-                    .toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                </p>
-              </div>
-            </Link>
-            <button
-              className="flex items-center space-x-[5px] bg-[#30628B] text-[#ffffff] p-2 rounded-[10px] hover:bg-[#4186BE] mt-[10px]"
-              onClick={() => addToCartHandler(product)}
+      <div className="w-full flex flex-col md:py-6 px-10 max-md:px-6">
+        <p className="text-[20px] font-[700] mb-[20px]">
+          {currentDepartmentText}
+        </p>
+        <div className="w-full flex max-md:flex-col md:flex-wrap">
+          {filteredProducts.map((product: ProductProps) => (
+            <div
+              key={product.id}
+              className="md:w-[33.3%] h-auto border-[1px] p-4 rounded-[10px] border-[#ffffff] hover:border-[#9d9e9f] mb-[20px] hover:shadow-[0_4px_30px_rgba(157,157,157,0.25)]"
             >
-              <BiCartAdd></BiCartAdd>
-              <p>Add to cart</p>
-            </button>
-          </div>
-        ))}
+              <Link href={`products/${product.id}`}>
+                <img src={product.image} className="rounded-[10px]"></img>
+                <div className="pt-[10px] text-[#000000]">
+                  <p className="text-[18px]">{product.name}</p>
+                  <p className="text-[24px]">
+                    ¥
+                    {product.price
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                  </p>
+                </div>
+              </Link>
+              <button
+                className="flex items-center space-x-[5px] bg-[#30628B] text-[#ffffff] p-2 rounded-[10px] hover:bg-[#4186BE] mt-[10px]"
+                onClick={() => addToCartHandler(product)}
+              >
+                <BiCartAdd></BiCartAdd>
+                <p>Add to cart</p>
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

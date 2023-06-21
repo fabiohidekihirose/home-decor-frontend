@@ -1,12 +1,12 @@
 export default function AboutUs() {
   return (
-    <div className="p-24 pt-36 text-[#000000] space-y-[30px] shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
+    <div className="max-md:p-6 p-24 max-md:pt-36 md:pt-36 text-[#000000] space-y-[30px] shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
       <img src="/images/about-us-1.jpg"></img>
       <div className="text-[40px] font-[700] flex flex-col items-center">
         About Us
       </div>
-      <div className="flex space-x-[2%] text-[18px] mb-[20px]">
-        <div className="w-[49%] space-y-[10px]">
+      <div className="flex md:space-x-[2%] text-[18px] mb-[20px] max-md:flex-col max-md:space-y-[10px]">
+        <div className="md:w-[49%] space-y-[10px]">
           <p>
             Welcome to HomeDecor, your premier destination for exceptional
             furniture and home decor solutions. At HomeDecor, we believe that a
@@ -40,7 +40,7 @@ export default function AboutUs() {
             functionality.
           </p>
         </div>
-        <div className="w-[49%] space-y-[10px] mt-0">
+        <div className="md:w-[49%] space-y-[10px] mt-0">
           <p>
             In addition to our extensive furniture offerings, we also offer an
             array of home decor accents, including lighting fixtures, rugs, art

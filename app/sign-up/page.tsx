@@ -41,18 +41,20 @@ export default function SignUp() {
   };
 
   return (
-    <div className="flex mx-auto space-x-[10%] h-[100vh]">
-      <div className="w-[40%] bg-[#30628b] flex flex-col space-y-[190px] text-[#ffffff] px-[60px]">
+    <div className="flex mx-auto md:space-x-[10%] h-[100vh] max-md:flex-col">
+      <div className="md:w-[40%] bg-[#30628b] flex flex-col md:space-y-[190px] text-[#ffffff] max-md:px-[30px] max-md:pb-[30px] px-[60px]">
         <Link href={"/"} className="flex w-[50%]">
           <img src="/images/home_decor_logo_login.png"></img>
         </Link>
-        <div className="text-[35px]">Create your HomeDecor account</div>
-        <div className="text-[10px] grow">
+        <div className="text-[35px] max-md:text-[25px]">
+          Create your HomeDecor account
+        </div>
+        <div className="text-[10px] grow max-md:hidden">
           Copyright 2023. All Rights Reserved
         </div>
       </div>
       <form
-        className="flex flex-col justify-center w-[30%]"
+        className="flex flex-col justify-center md:w-[30%] max-md:p-6 max-md:pb-10"
         onSubmit={submitHandler}
       >
         <h1 className="m-auto text-[30px] my-[20px]">Sign Up</h1>

@@ -8,12 +8,16 @@ import {
 } from "@/redux/slicers/cartSlice";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { CartItemCardProps } from "@/types";
+import Link from "next/link";
 
 export default function CartItemCard({ cartItem }: CartItemCardProps) {
   const dispatch = useAppDispatch();
 
   return (
-    <div className="flex h-[210px] space-x-[20px] p-[20px] rounded-[10px] shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
+    <Link
+      href={`/products/${cartItem.id}`}
+      className="flex h-[210px] space-x-[20px] p-[20px] rounded-[10px] shadow-[0_4px_30px_rgba(157,157,157,0.25)] hover:border-[1px] hover:border-black"
+    >
       <div className="w-[30%]">
         <img src={cartItem.image} className="rounded-[10px]"></img>
       </div>
@@ -48,6 +52,6 @@ export default function CartItemCard({ cartItem }: CartItemCardProps) {
           <RiDeleteBin5Line className="mr-[2px]"></RiDeleteBin5Line>Remove
         </button>
       </div>
-    </div>
+    </Link>
   );
 }

@@ -42,7 +42,11 @@ export default function ProductPage({
       );
 
       setProductInfo(productData.data);
-      setSimilarProducts(similarProductsData.data[0].products);
+      setSimilarProducts(
+        similarProductsData.data[0].products.filter(
+          (product: ProductProps) => productData.data.id !== product.id
+        )
+      );
     })();
   }, []);
 
@@ -60,12 +64,12 @@ export default function ProductPage({
   };
 
   return (
-    <div className="pt-36 p-24 flex flex-col space-y-[4%] rounded-[10px] shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
-      <div className="flex space-x-[3%]">
-        <div className="w-[50%]">
+    <div className="max-md:p-6 p-24 max-md:pt-36 md:pt-36 flex flex-col space-y-[4%] rounded-[10px] shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
+      <div className="flex max-md:flex-col md:space-x-[3%]">
+        <div className="md:w-[50%]">
           <img src={productInfo?.image} className="rounded-[10px]"></img>
         </div>
-        <div className="text-[#000000] w-[47%] space-y-[20px]">
+        <div className="text-[#000000] md:w-[47%] space-y-[20px]">
           <p className="text-[40px] font-[700]">{productInfo?.name}</p>
           <p className="text-[40px]">
             ¥
