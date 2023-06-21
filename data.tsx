@@ -5,11 +5,11 @@ export const carouselItems = [
   },
   {
     src: "/images/carousel-items/carousel-item-2.png",
-    url: "/products",
+    url: "/products?department=all",
   },
   {
     src: "/images/carousel-items/carousel-item-3.png",
-    url: "/products",
+    url: "/products?department=all",
   },
 ];
 

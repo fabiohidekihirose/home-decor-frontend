@@ -32,7 +32,7 @@ export default function Navbar({ setShowMenu }: NavbarProps) {
       );
       setDepartments(departmentsSorted);
     })();
-  });
+  }, []);
 
   const mouseOverHandler = () => {
     setShowAccountMenu(true);
@@ -44,9 +44,9 @@ export default function Navbar({ setShowMenu }: NavbarProps) {
 
   const pressEnterHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      router.push(
-        `/products?search=${(event.target as HTMLInputElement).value}`
-      );
+      const searchWord = (event.target as HTMLInputElement).value;
+      (event.target as HTMLInputElement).value = "";
+      router.push(`/products?search=${searchWord}`);
     }
   };
 
@@ -89,7 +89,7 @@ export default function Navbar({ setShowMenu }: NavbarProps) {
           </Link>
         </div>
       </div>
-      <div className="md:flex space-x-[30px] flex-wrap mx-[min(20px)] justify-center hidden">
+      <div className="md:flex space-x-[26px] flex-wrap mx-[min(20px)] justify-center hidden">
         {departments.map((department: DepartmentProps) => (
           <Link
             key={department.id}

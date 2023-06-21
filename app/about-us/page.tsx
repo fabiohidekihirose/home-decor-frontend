@@ -1,6 +1,6 @@
 export default function AboutUs() {
   return (
-    <div className="max-md:p-6 p-24 max-md:pt-36 md:pt-36 text-[#000000] space-y-[30px] shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
+    <div className="max-md:p-6 p-24 max-md:pt-36 md:pt-44 xl:pt-36 text-[#000000] space-y-[30px] shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
       <img src="/images/about-us-1.jpg"></img>
       <div className="text-[40px] font-[700] flex flex-col items-center">
         About Us

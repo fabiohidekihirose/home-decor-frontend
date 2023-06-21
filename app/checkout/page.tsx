@@ -37,8 +37,8 @@ export default function Checkout() {
   };
 
   return (
-    <div className=" p-24 pt-36 flex space-x-[2%]">
-      <div className="w-[59%] flex flex-col space-y-[10px] rounded-[10px] shadow-[0_4px_30px_rgba(157,157,157,0.25)] p-8">
+    <div className="max-md:flex-col max-md:space-y-[5%] max-md:p-6 p-24 max-md:pt-36 md:pt-36 p-24 pt-36 flex md:space-x-[2%] shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
+      <div className="md:w-[59%] flex flex-col space-y-[10px] rounded-[10px] shadow-[0_4px_30px_rgba(157,157,157,0.25)] p-8">
         <h3 className="text-[30px] font-[500] mb-[20px]">Customer Info</h3>
         <div className="flex flex-col">
           <label>First Name</label>
@@ -85,7 +85,7 @@ export default function Checkout() {
             required={true}
           />
         </div>
-        <h3 className="text-[30px] font-[500]">Payment Info</h3>
+        <h3 className="text-[30px] font-[500] py-[20px]">Payment Info</h3>
         <div className="flex flex-col">
           <label>Credit Card Number</label>
           <InputField
@@ -127,7 +127,7 @@ export default function Checkout() {
           </div>
         </div>
       </div>
-      <div className="w-[39%] space-y-[20px] p-8 rounded-[10px] shadow-[0_4px_30px_rgba(157,157,157,0.25)] h-min">
+      <div className="md:w-[39%] space-y-[20px] p-8 rounded-[10px] shadow-[0_4px_30px_rgba(157,157,157,0.25)] h-min">
         <h3 className="text-[30px] font-[500] mb-[20px]">Current Cart</h3>
         {cartItems.map((item) => (
           <div className="flex justify-between">

@@ -3,7 +3,7 @@ import { BsInstagram, BsTwitter, BsFacebook } from "react-icons/bs";
 
 export default function Footer() {
   return (
-    <div className="px-6 md:px-24 py-10 border-t-2 flex max-md:flex-col-reverse space-between">
+    <div className="px-6 md:px-24 py-10 border-t-2 flex max-md:flex-col-reverse space-between border-none">
       <div className="md:w-[50%] space-y-[30px]">
         <h2 className="font-[500] tracking-[.25em] text-[20px] max-md:mt-[30px]">
           HOMEDECOR

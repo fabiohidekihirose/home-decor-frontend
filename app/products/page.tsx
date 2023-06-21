@@ -27,7 +27,6 @@ export default function ProductsPage() {
   useEffect(() => {
     (async () => {
       const allDepartments = await axios.get(`${baseUrl}/departments`);
-
       setDepartmets(
         allDepartments.data.sort(
           (a: DepartmentProps, b: DepartmentProps) => a.id - b.id
@@ -52,7 +51,7 @@ export default function ProductsPage() {
 
         setFilteredProducts(productsList.data[0].products);
         setCurrentDepartment(departmentInUrl);
-        setCurrentDepartmentText(departmentName.label);
+        setCurrentDepartmentText(`Department: ${departmentName.label}`);
       } else if (searchInUrl) {
         const productsList = await axios.get(
           `${baseUrl}/products/search/${searchInUrl}`
@@ -61,18 +60,14 @@ export default function ProductsPage() {
         if (productsList.data.length) {
           setFilteredProducts(productsList.data);
 
-          const departmentName = allDepartments.data.find(
-            (department: DepartmentProps) =>
-              department.department === searchInUrl
-          );
-          setCurrentDepartmentText(departmentName.label);
+          setCurrentDepartmentText(`Search: ${searchInUrl}`);
         } else {
           setFilteredProducts([]);
           setCurrentDepartmentText("All Products");
         }
       }
     })();
-  }, [departmentInUrl]);
+  }, [departmentInUrl, searchInUrl]);
 
   const clickHandler = async ({
     currentTarget,

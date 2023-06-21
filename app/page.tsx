@@ -23,10 +23,10 @@ export default function Home() {
       );
       setDepartments(departmentsSorted);
     })();
-  });
+  }, []);
 
   return (
-    <main className="flex flex-col items-center justify-between p-6 md:p-24 max-md:pt-36 md:pt-36 shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
+    <main className="flex flex-col items-center justify-between p-6 md:p-24 max-md:pt-36 md:pt-44 xl:pt-36 shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
       <div className="w-full md:space-y-[50px] max-md:space-y-[20px]">
         <div className="md:flex w-full md:space-x-[1.5%] max-md:space-y-[20px]">
           <Carousel
