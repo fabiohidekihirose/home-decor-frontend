@@ -5,13 +5,18 @@ import Link from "next/link";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { RiAccountCircleLine, RiShoppingCart2Line } from "react-icons/ri";
+import { RxHamburgerMenu } from "react-icons/rx";
 import { DepartmentProps } from "@/types";
 import AccountMenu from "./AccountMenu";
 import { useRouter } from "next/navigation";
 import { useAppSelector } from "@/redux/hooks";
 import { selectCurrentUser } from "@/redux/slicers/authSlice";
 
-export default function Navbar() {
+interface NavbarProps {
+  setShowMenu: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function Navbar({ setShowMenu }: NavbarProps) {
   const [departments, setDepartments] = useState([]);
   const [showAccountMenu, setShowAccountMenu] = useState(false);
   const router = useRouter();
@@ -54,6 +59,11 @@ export default function Navbar() {
           className="max-md:w-[90%] w-[50%] h-[40px] rounded-[10px] p-4 border-[#30628b] border-[2px]"
           onKeyUp={pressEnterHandler}
         ></input>
+        <RxHamburgerMenu
+          className="md:hidden absolute right-[5%] top-[15%]"
+          onClick={() => setShowMenu(true)}
+          size={35}
+        />
         <div className="flex items-center absolute right-[50px] max-md:hidden">
           <Link
             href={user ? "/account" : "/login"}
