@@ -14,15 +14,17 @@ export default function CartItemCard({ cartItem }: CartItemCardProps) {
   const dispatch = useAppDispatch();
 
   return (
-    <Link
-      href={`/products/${cartItem.id}`}
-      className="flex h-[210px] space-x-[20px] p-[20px] rounded-[10px] shadow-[0_4px_30px_rgba(157,157,157,0.25)] hover:border-[1px] hover:border-black"
-    >
+    <div className="flex h-[210px] space-x-[20px] p-[20px] rounded-[10px] shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
       <div className="w-[30%]">
         <img src={cartItem.image} className="rounded-[10px]"></img>
       </div>
       <div className="space-y-[20px]">
-        <h3 className="text-[20px]">{cartItem.name}</h3>
+        <Link
+          href={`/products/${cartItem.id}`}
+          className="text-[20px] hover:text-[#30628b]"
+        >
+          {cartItem.name}
+        </Link>
         <div className="flex">
           <button
             className="border-[1px] border-[#000000] p-2 rounded-l-[10px] hover:bg-[#30628b] hover:text-[#ffffff]"
@@ -52,6 +54,6 @@ export default function CartItemCard({ cartItem }: CartItemCardProps) {
           <RiDeleteBin5Line className="mr-[2px]"></RiDeleteBin5Line>Remove
         </button>
       </div>
-    </Link>
+    </div>
   );
 }
