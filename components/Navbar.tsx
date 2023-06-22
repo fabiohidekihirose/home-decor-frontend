@@ -56,7 +56,7 @@ export default function Navbar({ setShowMenu }: NavbarProps) {
         <Logo />
         <input
           placeholder="Search for a product..."
-          className="max-md:w-[90%] w-[50%] h-[40px] rounded-[10px] p-4 border-[#30628b] border-[2px]"
+          className="max-md:w-[90%] max-xl:w-[40%] w-[50%] h-[40px] rounded-[10px] p-4 border-[#30628b] border-[2px]"
           onKeyUp={pressEnterHandler}
         ></input>
         <RxHamburgerMenu

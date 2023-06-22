@@ -8,6 +8,7 @@ import { useAppDispatch } from "@/redux/hooks";
 import { addToCart } from "@/redux/slicers/cartSlice";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ProductProps, DepartmentProps } from "@/types";
+import DiscountPrice from "@/components/DiscountPrice";
 
 export default function ProductsPage() {
   const [departments, setDepartmets] = useState([]);
@@ -39,6 +40,12 @@ export default function ProductsPage() {
         setFilteredProducts(allProductsList.data);
         setCurrentDepartment("all");
         setCurrentDepartmentText("All Products");
+      } else if (departmentInUrl === "special-offers") {
+        const offerProducts = await axios.get(`${baseUrl}/products/sales`);
+
+        setFilteredProducts(offerProducts.data);
+        setCurrentDepartment("special-offers");
+        setCurrentDepartmentText("Special Offers");
       } else if (departmentInUrl) {
         const productsList = await axios.get(
           `${baseUrl}/products/departments/${departmentInUrl}`
@@ -126,12 +133,20 @@ export default function ProductsPage() {
                 <img src={product.image} className="rounded-[10px]"></img>
                 <div className="pt-[10px] text-[#000000]">
                   <p className="text-[18px]">{product.name}</p>
-                  <p className="text-[24px]">
-                    ¥
-                    {product.price
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                  </p>
+                  {product.discount > 0 ? (
+                    <DiscountPrice
+                      price={product.price}
+                      discount={product.discount}
+                      textSize={24}
+                    />
+                  ) : (
+                    <p className="text-[24px]">
+                      ¥
+                      {product?.price
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    </p>
+                  )}
                 </div>
               </Link>
               <button

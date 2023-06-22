@@ -22,7 +22,7 @@ export default function Cart() {
   };
 
   return (
-    <div className="flex max-md:flex-col max-md:p-6 p-24 max-md:pt-36 md:pt-36 md:space-x-[2%] text-[#000000] shadow-[0_4px_30px_rgba(157,157,157,0.25)] max-md:space-y-[30px]">
+    <div className="flex max-md:flex-col max-md:p-6 p-24 max-md:pt-36 md:pt-44 xl:pt-36 md:space-x-[2%] text-[#000000] shadow-[0_4px_30px_rgba(157,157,157,0.25)] max-md:space-y-[30px]">
       <div className="md:w-[64%] space-y-[30px]">
         <h2 className="text-[40px] font-[500]">My Cart</h2>
         <div className="space-y-[20px]">
@@ -44,7 +44,9 @@ export default function Cart() {
         </p>
         <button
           className="bg-[#30628b] text-[#ffffff] p-4 rounded-[10px] hover:bg-[#4186BE] w-full"
-          onClick={() => router.push("/checkout")}
+          onClick={() => {
+            cartItems.length && router.push("/checkout");
+          }}
         >
           Procedure to checkout
         </button>

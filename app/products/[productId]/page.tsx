@@ -8,6 +8,7 @@ import { ProductProps } from "@/types";
 import { useAppDispatch } from "@/redux/hooks";
 import { useRouter } from "next/navigation";
 import { addToCart } from "@/redux/slicers/cartSlice";
+import DiscountPrice from "@/components/DiscountPrice";
 
 export default function ProductPage({
   params,
@@ -24,6 +25,7 @@ export default function ProductPage({
     quantity: 0,
     description: "",
     inCart: 0,
+    discount: 0,
   });
   const [similarProducts, setSimilarProducts] = useState([]);
   const dispatch = useAppDispatch();
@@ -64,19 +66,27 @@ export default function ProductPage({
   };
 
   return (
-    <div className="max-md:p-6 p-24 max-md:pt-36 md:pt-36 flex flex-col space-y-[4%] rounded-[10px] shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
+    <div className="max-md:p-6 p-24 max-md:pt-36 md:pt-44 xl:pt-36 flex flex-col space-y-[4%] rounded-[10px] shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
       <div className="flex max-md:flex-col md:space-x-[3%]">
         <div className="md:w-[50%]">
           <img src={productInfo?.image} className="rounded-[10px]"></img>
         </div>
         <div className="text-[#000000] md:w-[47%] space-y-[20px]">
           <p className="text-[40px] font-[700]">{productInfo?.name}</p>
-          <p className="text-[40px]">
-            ¥
-            {productInfo?.price
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-          </p>
+          {productInfo.discount > 0 ? (
+            <DiscountPrice
+              price={productInfo.price}
+              discount={productInfo.discount}
+              textSize={40}
+            />
+          ) : (
+            <p className="text-[40px]">
+              ¥
+              {productInfo?.price
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            </p>
+          )}
           <p>FREE shipping</p>
           <div className="flex space-x-[20px] items-center">
             <div className="flex w-[20%]">

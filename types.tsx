@@ -7,6 +7,7 @@ export interface ProductProps {
   quantity: number;
   description: string;
   inCart: number;
+  discount: number;
 }
 
 export interface DepartmentProps {
