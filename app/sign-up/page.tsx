@@ -54,7 +54,7 @@ export default function SignUp() {
         </div>
       </div>
       <form
-        className="flex flex-col justify-center md:w-[30%] max-md:p-6 max-md:pb-10"
+        className="flex flex-col justify-center md:w-[40%] xl:w-[30%] max-md:p-6 max-md:pb-10"
         onSubmit={submitHandler}
       >
         <h1 className="m-auto text-[30px] my-[20px]">Sign Up</h1>

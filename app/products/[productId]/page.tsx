@@ -66,7 +66,7 @@ export default function ProductPage({
   };
 
   return (
-    <div className="max-md:p-6 p-24 max-md:pt-36 md:pt-44 xl:pt-36 flex flex-col space-y-[4%] rounded-[10px] shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
+    <div className="p-6 xl:p-24 max-md:pt-36 md:pt-44 xl:pt-36 flex flex-col space-y-[4%] rounded-[10px] shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
       <div className="flex max-md:flex-col md:space-x-[3%]">
         <div className="md:w-[50%]">
           <img src={productInfo?.image} className="rounded-[10px]"></img>

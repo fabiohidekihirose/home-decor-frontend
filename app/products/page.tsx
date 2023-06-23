@@ -127,7 +127,7 @@ export default function ProductsPage() {
           {filteredProducts.map((product: ProductProps) => (
             <div
               key={product.id}
-              className="md:w-[33.3%] h-auto border-[1px] p-4 rounded-[10px] border-[#ffffff] hover:border-[#9d9e9f] mb-[20px] hover:shadow-[0_4px_30px_rgba(157,157,157,0.25)]"
+              className="xl:w-[33.3%] md:w-1/2 h-auto border-[1px] p-4 rounded-[10px] border-[#ffffff] hover:border-[#9d9e9f] mb-[20px] hover:shadow-[0_4px_30px_rgba(157,157,157,0.25)]"
             >
               <Link href={`products/${product.id}`}>
                 <img src={product.image} className="rounded-[10px]"></img>
