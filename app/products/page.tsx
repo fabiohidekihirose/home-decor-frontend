@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
+import Image from "next/image";
 import { BiCartAdd } from "react-icons/bi";
 import { useAppDispatch } from "@/redux/hooks";
 import { addToCart } from "@/redux/slicers/cartSlice";
@@ -130,7 +131,14 @@ export default function ProductsPage() {
               className="xl:w-[33.3%] md:w-1/2 h-auto border-[1px] p-4 rounded-[10px] border-[#ffffff] hover:border-[#9d9e9f] mb-[20px] hover:shadow-[0_4px_30px_rgba(157,157,157,0.25)]"
             >
               <Link href={`products/${product.id}`}>
-                <img src={product.image} className="rounded-[10px]"></img>
+                <Image
+                  alt={product.name}
+                  src={product.image}
+                  width="0"
+                  height="0"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="rounded-[10px] w-full h-auto"
+                ></Image>
                 <div className="pt-[10px] text-[#000000]">
                   <p className="text-[18px]">{product.name}</p>
                   {product.discount > 0 ? (

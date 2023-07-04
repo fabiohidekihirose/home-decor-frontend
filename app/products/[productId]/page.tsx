@@ -9,6 +9,7 @@ import { useAppDispatch } from "@/redux/hooks";
 import { useRouter } from "next/navigation";
 import { addToCart } from "@/redux/slicers/cartSlice";
 import DiscountPrice from "@/components/DiscountPrice";
+import Image from "next/image";
 
 export default function ProductPage({
   params,
@@ -69,7 +70,14 @@ export default function ProductPage({
     <div className="p-6 xl:p-24 max-md:pt-36 md:pt-44 xl:pt-36 flex flex-col space-y-[4%] rounded-[10px] shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
       <div className="flex max-md:flex-col md:space-x-[3%]">
         <div className="md:w-[50%]">
-          <img src={productInfo?.image} className="rounded-[10px]"></img>
+          <Image
+            alt={productInfo?.name}
+            src={productInfo?.image}
+            width="0"
+            height="0"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="rounded-[10px] w-full h-auto"
+          ></Image>
         </div>
         <div className="text-[#000000] md:w-[47%] space-y-[20px]">
           <p className="text-[40px] font-[700]">{productInfo?.name}</p>
@@ -130,7 +138,14 @@ export default function ProductPage({
               href={`products/${product.id}`}
               className="w-[25%] p-2 border-[1px] rounded-[10px] border-[#ffffff] hover:border-[#7f7f7f] mb-[20px]"
             >
-              <img src={product.image} className="rounded-[10px]"></img>
+              <Image
+                alt={product?.name}
+                src={product?.image}
+                width="0"
+                height="0"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="rounded-[10px] w-full h-auto"
+              ></Image>
               <div className="pt-[10px]">
                 <p className="text-[20px]">{product.name}</p>
                 <p className="text-[24px]">

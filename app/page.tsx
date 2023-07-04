@@ -39,9 +39,15 @@ export default function Home() {
             interval={5000}
             onClickItem={(index, item: any) => router.push(item?.props.href)}
           >
-            {carouselItems.map((item) => (
-              <Link href={item.url} key={item.src}>
-                <img src={item.src}></img>
+            {carouselItems.map((item, index) => (
+              <Link href={item.url} key={item.src} className="w-full h-full">
+                <Image
+                  alt={`Image${index}`}
+                  src={item.src}
+                  width="0"
+                  height="0"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                ></Image>
               </Link>
             ))}
           </Carousel>
@@ -58,7 +64,7 @@ export default function Home() {
                   src={banner.src}
                   width="0"
                   height="0"
-                  sizes="100vw"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="w-full h-auto rounded-[10px]"
                 ></Image>
               </Link>
@@ -77,7 +83,7 @@ export default function Home() {
                 src={banner.src}
                 width="0"
                 height="0"
-                sizes="100vw"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="w-full h-auto rounded-[10px] "
               ></Image>
             </Link>
@@ -96,14 +102,19 @@ export default function Home() {
                   pathname: `/products`,
                   query: { department: department.department },
                 }}
-                className="max-md:w-[33%] md:w-[20%] rounded-[10px] overflow-hidden border-[1px] p-[10px] border-[#ffffff] hover:border-[#9d9e9f] hover:shadow-[0_4px_30px_rgba(157,157,157,0.25)]"
+                className="max-md:w-[33%] md:w-[20%] flex flex-col items-center rounded-[10px] overflow-hidden border-[1px] p-[10px] border-[#ffffff] hover:border-[#9d9e9f] hover:shadow-[0_4px_30px_rgba(157,157,157,0.25)]"
               >
-                <div className="flex flex-col items-center">
-                  <img src={department.image} className="rounded-[10px]"></img>
-                  <p className="text-center text-[#000000] pt-[10px]">
-                    {department.label}
-                  </p>
-                </div>
+                <Image
+                  alt={department.label}
+                  src={department.image}
+                  width="0"
+                  height="0"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                  className="rounded-[10px] w-full h-auto"
+                ></Image>
+                <p className="text-center text-[#000000] pt-[10px]">
+                  {department.label}
+                </p>
               </Link>
             ))}
           </div>
