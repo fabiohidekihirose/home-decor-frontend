@@ -37,8 +37,11 @@ export default function Checkout() {
   };
 
   return (
-    <div className="max-md:flex-col max-md:space-y-[5%] max-md:p-6 p-24 max-md:pt-36 md:pt-44 xl:pt-36 flex md:space-x-[2%] shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
-      <div className="md:w-[59%] flex flex-col space-y-[10px] rounded-[10px] shadow-[0_4px_30px_rgba(157,157,157,0.25)] p-8">
+    <form className="max-md:flex-col max-md:space-y-[5%] max-md:p-6 p-24 max-md:pt-36 md:pt-44 xl:pt-36 flex md:space-x-[2%] shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
+      <div
+        className="md:w-[59%] flex flex-col space-y-[10px] rounded-[10px] shadow-[0_4px_30px_rgba(157,157,157,0.25)] p-8"
+        onSubmit={finishOrderHandler}
+      >
         <h3 className="text-[30px] font-[500] mb-[20px]">Customer Info</h3>
         <div className="flex flex-col">
           <label>First Name</label>
@@ -153,13 +156,10 @@ export default function Checkout() {
               .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
           </p>
         </div>
-        <button
-          className="bg-[#30628b] text-[#ffffff] p-4 rounded-[10px] hover:bg-[#4186BE] w-full"
-          onClick={finishOrderHandler}
-        >
+        <button className="bg-[#30628b] text-[#ffffff] p-4 rounded-[10px] hover:bg-[#4186BE] w-full">
           Finish Order
         </button>
       </div>
-    </div>
+    </form>
   );
 }
