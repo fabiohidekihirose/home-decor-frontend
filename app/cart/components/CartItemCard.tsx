@@ -8,6 +8,7 @@ import {
 } from "@/redux/slicers/cartSlice";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { CartItemCardProps } from "@/types";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function CartItemCard({ cartItem }: CartItemCardProps) {
@@ -15,8 +16,15 @@ export default function CartItemCard({ cartItem }: CartItemCardProps) {
 
   return (
     <div className="flex h-[210px] space-x-[20px] p-[20px] rounded-[10px] shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
-      <div className="w-[30%]">
-        <img src={cartItem.image} className="rounded-[10px]"></img>
+      <div className="w-[230px]">
+        <Image
+          src={cartItem.image}
+          alt={cartItem.name}
+          className="rounded-[10px] w-full h-auto"
+          width="0"
+          height="0"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 30vw, 15vw"
+        ></Image>
       </div>
       <div className="space-y-[20px]">
         <Link

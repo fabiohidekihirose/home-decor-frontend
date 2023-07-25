@@ -136,7 +136,7 @@ export default function ProductsPage() {
                   src={product.image}
                   width="0"
                   height="0"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 30vw, 15vw"
                   className="rounded-[10px] w-full h-auto"
                 ></Image>
                 <div className="pt-[10px] text-[#000000]">

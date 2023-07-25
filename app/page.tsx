@@ -16,13 +16,15 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    (async () => {
+    const getDepartments = async () => {
       const departmentsData = await axios.get(`${baseUrl}/departments`);
       const departmentsSorted = departmentsData.data.sort(
         (a: DepartmentProps, b: DepartmentProps) => a.id - b.id
       );
       setDepartments(departmentsSorted);
-    })();
+    };
+
+    getDepartments();
   }, []);
 
   return (
@@ -83,7 +85,7 @@ export default function Home() {
                 src={banner.src}
                 width="0"
                 height="0"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 40vw, 33vw"
                 className="w-full h-auto rounded-[10px] "
               ></Image>
             </Link>
@@ -109,7 +111,7 @@ export default function Home() {
                   src={department.image}
                   width="0"
                   height="0"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 30vw, 15vw"
                   className="rounded-[10px] w-full h-auto"
                 ></Image>
                 <p className="text-center text-[#000000] pt-[10px]">
