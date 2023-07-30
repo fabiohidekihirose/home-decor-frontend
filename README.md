@@ -95,6 +95,11 @@ _Please note you will need to follow the steps found on [home-decor-backend](htt
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## Demo Account
+
+- Email: john_smith@gmail.com
+- Password: john123
+
 ## Contact
 
 - Hideki Hirose - [@fabiohidekihirose](https://github.com/fabiohidekihirose) - fabiohidekihirose@gmail.com
