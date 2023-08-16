@@ -92,6 +92,7 @@ _Please note you will need to follow the steps found on [home-decor-backend](htt
 - Add and remove products from cart
 - Search by key words
 - Filter by department
+- Favorites
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
