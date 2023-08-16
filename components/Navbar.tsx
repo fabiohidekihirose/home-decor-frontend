@@ -6,6 +6,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { RiAccountCircleLine, RiShoppingCart2Line } from "react-icons/ri";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { MdOutlineFavoriteBorder } from "react-icons/md";
 import { DepartmentProps } from "@/types";
 import AccountMenu from "./AccountMenu";
 import { useRouter } from "next/navigation";
@@ -65,6 +66,13 @@ export default function Navbar({ setShowMenu }: NavbarProps) {
           size={35}
         />
         <div className="flex items-center absolute right-[50px] max-md:hidden">
+          <Link
+            href={"/favorite"}
+            className="ml-[20px] flex flex-col items-center hover:text-[#30628b] text-[#000000]"
+          >
+            <MdOutlineFavoriteBorder size={25} />
+            <div>Favorite</div>
+          </Link>
           <Link
             href={user ? "/account" : "/login"}
             className="ml-[20px] flex flex-col items-center hover:text-[#30628b] text-[#000000]"
