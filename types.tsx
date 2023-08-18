@@ -17,6 +17,6 @@ export interface DepartmentProps {
   image: string;
 }
 
-export interface CartItemCardProps {
-  cartItem: ProductProps;
+export interface ItemCardProps {
+  item: ProductProps;
 }

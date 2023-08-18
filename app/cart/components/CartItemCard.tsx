@@ -7,19 +7,19 @@ import {
   removeItem,
 } from "@/redux/slicers/cartSlice";
 import { RiDeleteBin5Line } from "react-icons/ri";
-import { CartItemCardProps } from "@/types";
+import { ItemCardProps } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function CartItemCard({ cartItem }: CartItemCardProps) {
+export default function CartItemCard({ item }: ItemCardProps) {
   const dispatch = useAppDispatch();
 
   return (
     <div className="flex h-[210px] space-x-[20px] p-[20px] rounded-[10px] shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
       <div className="w-[230px]">
         <Image
-          src={cartItem.image}
-          alt={cartItem.name}
+          src={item.image}
+          alt={item.name}
           className="rounded-[10px] w-full h-auto"
           width="0"
           height="0"
@@ -28,24 +28,24 @@ export default function CartItemCard({ cartItem }: CartItemCardProps) {
       </div>
       <div className="space-y-[20px]">
         <Link
-          href={`/products/${cartItem.id}`}
+          href={`/products/${item.id}`}
           className="text-[20px] hover:text-[#30628b]"
         >
-          {cartItem.name}
+          {item.name}
         </Link>
         <div className="flex">
           <button
             className="border-[1px] border-[#000000] p-2 rounded-l-[10px] hover:bg-[#30628b] hover:text-[#ffffff]"
-            onClick={() => dispatch(decrementInCart({ id: cartItem.id }))}
+            onClick={() => dispatch(decrementInCart({ id: item.id }))}
           >
             -
           </button>
           <div className="text-center border-y-[1px] border-[#000000] w-[20%] p-2">
-            {cartItem.inCart}
+            {item.inCart}
           </div>
           <button
             className="border-[1px] border-[#000000] p-2 rounded-r-[10px] hover:bg-[#30628b] hover:text-[#ffffff]"
-            onClick={() => dispatch(incrementInCart({ id: cartItem.id }))}
+            onClick={() => dispatch(incrementInCart({ id: item.id }))}
           >
             +
           </button>
@@ -53,11 +53,11 @@ export default function CartItemCard({ cartItem }: CartItemCardProps) {
       </div>
       <div className="grow flex flex-col items-end space-y-[90px]">
         <div className="text-[30px]">
-          ¥{cartItem.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+          ¥{item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
         </div>
         <button
           className="hover:underline hover:text-[#30628b] flex items-center"
-          onClick={() => dispatch(removeItem({ id: cartItem.id }))}
+          onClick={() => dispatch(removeItem({ id: item.id }))}
         >
           <RiDeleteBin5Line className="mr-[2px]"></RiDeleteBin5Line>Remove
         </button>

@@ -28,7 +28,7 @@ export default function Cart() {
         <div className="space-y-[20px]">
           {cartItems.length
             ? cartItems.map((cartItem: ProductProps) => (
-                <CartItem cartItem={cartItem} key={cartItem.id} />
+                <CartItem item={cartItem} key={cartItem.id} />
               ))
             : "No items in Cart"}
         </div>
