@@ -5,10 +5,12 @@ import axios from "axios";
 import Link from "next/link";
 import Image from "next/image";
 import { BiCartAdd } from "react-icons/bi";
+import { MdOutlineFavoriteBorder } from "react-icons/md";
 import { useAppDispatch } from "@/redux/hooks";
 import { addToCart } from "@/redux/slicers/cartSlice";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ProductProps, DepartmentProps } from "@/types";
+import { addToFavorite } from "@/redux/slicers/favoriteSlice";
 import DiscountPrice from "@/components/DiscountPrice";
 
 export default function ProductsPage() {
@@ -157,13 +159,21 @@ export default function ProductsPage() {
                   )}
                 </div>
               </Link>
-              <button
-                className="flex items-center space-x-[5px] bg-[#30628B] text-[#ffffff] p-2 rounded-[10px] hover:bg-[#4186BE] mt-[10px]"
-                onClick={() => addToCartHandler(product)}
-              >
-                <BiCartAdd></BiCartAdd>
-                <p>Add to cart</p>
-              </button>
+              <div className="flex items-center space-x-[10px] mt-[10px]">
+                <button
+                  className="flex items-center space-x-[5px] bg-[#30628B] text-[#ffffff] p-2 rounded-[10px] hover:bg-[#4186BE]"
+                  onClick={() => addToCartHandler(product)}
+                >
+                  <BiCartAdd></BiCartAdd>
+                  <p>Add to cart</p>
+                </button>
+                <button onClick={() => dispatch(addToFavorite(product))}>
+                  <MdOutlineFavoriteBorder
+                    size={30}
+                    className="hover:text-[#4186BE]"
+                  />
+                </button>
+              </div>
             </div>
           ))}
         </div>
