@@ -29,6 +29,8 @@ export default function ProductPage({
     discount: 0,
   });
   const [similarProducts, setSimilarProducts] = useState([]);
+  const [showLess, setShowLess] = useState(true);
+  const [showButtonText, setShowButtonText] = useState("Show More");
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -64,6 +66,16 @@ export default function ProductPage({
   const addToCartHandler = (product: ProductProps, add: number = 1) => {
     dispatch(addToCart({ ...product, inCart: add }));
     router.push("/cart");
+  };
+
+  const showMoreOrLessHandler = () => {
+    if (showLess) {
+      setShowLess(false);
+      setShowButtonText("Show Less");
+    } else {
+      setShowLess(true);
+      setShowButtonText("Show More");
+    }
   };
 
   return (
@@ -123,7 +135,16 @@ export default function ProductPage({
           </div>
           <div className="space-y-[2%]">
             <p className="text-[20px]">Description</p>
-            <p>{productInfo?.description}</p>
+            <p
+              className={`whitespace-pre-wrap ${
+                showLess ? "line-clamp-[4]" : ""
+              }`}
+            >
+              {productInfo?.description}
+            </p>
+            <button className="underline" onClick={showMoreOrLessHandler}>
+              {showButtonText}
+            </button>
           </div>
         </div>
       </div>
