@@ -67,7 +67,7 @@ export default function Navbar({ setShowMenu }: NavbarProps) {
         />
         <div className="flex items-center absolute right-[50px] max-md:hidden">
           <Link
-            href={"/favorite"}
+            href={"/favorites"}
             className="ml-[20px] flex flex-col items-center hover:text-[#30628b] text-[#000000]"
           >
             <MdOutlineFavoriteBorder size={25} />

@@ -46,6 +46,14 @@ export default function Menu({ setShowMenu, showMenu }: MenuProps) {
         <button
           onClick={() => {
             setShowMenu(false);
+            router.push("/favorites");
+          }}
+        >
+          Favorites
+        </button>
+        <button
+          onClick={() => {
+            setShowMenu(false);
             router.push("/cart");
           }}
         >
