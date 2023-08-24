@@ -57,15 +57,15 @@ export default function Navbar({ setShowMenu }: NavbarProps) {
         <Logo />
         <input
           placeholder="Search for a product..."
-          className="max-md:w-[90%] max-xl:w-[40%] w-[50%] h-[40px] rounded-[10px] p-4 border-[#30628b] border-[2px]"
+          className="max-md:w-[90%] max-lg:w-[55%] max-xl:w-[40%] w-[50%] h-[40px] rounded-[10px] p-4 border-[#30628b] border-[2px]"
           onKeyUp={pressEnterHandler}
         ></input>
         <RxHamburgerMenu
-          className="md:hidden absolute right-[5%] top-[15%]"
+          className="lg:hidden absolute right-[5%] top-[15%]"
           onClick={() => setShowMenu(true)}
           size={35}
         />
-        <div className="flex items-center absolute right-[50px] max-md:hidden">
+        <div className="flex items-center absolute right-[50px] max-lg:hidden">
           <Link
             href={"/favorites"}
             className="ml-[20px] flex flex-col items-center hover:text-[#30628b] text-[#000000]"
