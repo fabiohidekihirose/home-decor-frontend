@@ -6,7 +6,7 @@ import { addToFavorite } from "@/redux/slicers/favoriteSlice";
 import DiscountPrice from "@/components/DiscountPrice";
 import { ProductProps } from "@/types";
 import { useRouter } from "next/navigation";
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { addToCart } from "@/redux/slicers/cartSlice";
 
 interface ProductCard {
@@ -16,6 +16,9 @@ interface ProductCard {
 export default function ProductCard({ product }: ProductCard) {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const favoriteList = useAppSelector(
+    (state) => state.favoriteReducer.favorite
+  );
 
   const addToCartHandler = (product: ProductProps) => {
     dispatch(addToCart({ ...product, inCart: 1 }));
@@ -59,15 +62,15 @@ export default function ProductCard({ product }: ProductCard) {
           <BiCartAdd></BiCartAdd>
           <p>Add to cart</p>
         </button>
-        <button onClick={() => dispatch(addToFavorite(product))}>
-          <MdOutlineFavoriteBorder
-            size={30}
-            // className={
-            //   favorites.includes(product)
-            //     ? "text-[#4186BE]"
-            //     : "hover:text-[#4186BE]"
-            // }
-          />
+        <button
+          onClick={() => dispatch(addToFavorite(product))}
+          className={
+            favoriteList.filter((favorite) => favorite.id === product.id).length
+              ? "text-[#4186BE]"
+              : "hover:text-[#4186BE]"
+          }
+        >
+          <MdOutlineFavoriteBorder size={30} />
         </button>
       </div>
     </div>
