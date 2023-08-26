@@ -2,12 +2,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { BiCartAdd } from "react-icons/bi";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
-import { addToFavorite } from "@/redux/slicers/favoriteSlice";
+import { addToFavorite, removeFavorite } from "@/redux/slicers/favoriteSlice";
 import DiscountPrice from "@/components/DiscountPrice";
 import { ProductProps } from "@/types";
 import { useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { addToCart } from "@/redux/slicers/cartSlice";
+import { useState } from "react";
 
 interface ProductCard {
   product: ProductProps;
@@ -19,10 +20,23 @@ export default function ProductCard({ product }: ProductCard) {
   const favoriteList = useAppSelector(
     (state) => state.favoriteReducer.favorite
   );
+  const [isFavorited, setIsFavorited] = useState(
+    !!favoriteList.filter((favorite) => favorite.id === product.id).length
+  );
 
   const addToCartHandler = (product: ProductProps) => {
     dispatch(addToCart({ ...product, inCart: 1 }));
     router.push("/cart");
+  };
+
+  const favoriteButtonHandler = () => {
+    if (isFavorited) {
+      setIsFavorited(false);
+      dispatch(removeFavorite(product));
+    } else {
+      setIsFavorited(true);
+      dispatch(addToFavorite(product));
+    }
   };
 
   return (
@@ -63,12 +77,10 @@ export default function ProductCard({ product }: ProductCard) {
           <p>Add to cart</p>
         </button>
         <button
-          onClick={() => dispatch(addToFavorite(product))}
-          className={
-            favoriteList.filter((favorite) => favorite.id === product.id).length
-              ? "text-[#4186BE]"
-              : "hover:text-[#4186BE]"
-          }
+          onClick={favoriteButtonHandler}
+          className={`${
+            isFavorited && "bg-[#30628B] text-[#FFFFFF]"
+          } hover:bg-[#4186BE] hover:text-[#FFFFFF] rounded-[50%] p-2`}
         >
           <MdOutlineFavoriteBorder size={30} />
         </button>
