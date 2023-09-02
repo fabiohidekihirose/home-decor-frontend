@@ -33,9 +33,13 @@ export default function AccountMenu({
           <Link href={"/account"} className="hover:text-[#30628b]">
             My Account
           </Link>
-          <button onClick={clickHandler} className="hover:text-[#30628b]">
+          <Link
+            href={"/login"}
+            onClick={clickHandler}
+            className="hover:text-[#30628b]"
+          >
             Log Out
-          </button>
+          </Link>
         </div>
       ) : (
         <div className="flex flex-col space-y-[20px]">
