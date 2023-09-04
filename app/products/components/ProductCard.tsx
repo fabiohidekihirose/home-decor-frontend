@@ -4,7 +4,7 @@ import { BiCartAdd } from "react-icons/bi";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
 import { addToFavorite, removeFavorite } from "@/redux/slicers/favoriteSlice";
 import DiscountPrice from "@/components/DiscountPrice";
-import { ProductProps } from "@/types";
+import { ProductProps, ReviewProps } from "@/types";
 import { useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { addToCart } from "@/redux/slicers/cartSlice";
@@ -14,11 +14,32 @@ interface ProductCard {
   product: ProductProps;
 }
 
+export function buildRatingStars(allReviews: ReviewProps[]) {
+  if (allReviews.length) {
+    let ratingStars = "";
+
+    let average =
+      allReviews.reduce((accum, curr) => accum + curr.rating, 0) /
+      allReviews.length;
+
+    for (let i = 0; i < 5; i++) {
+      if (average > 1) {
+        ratingStars += "★";
+        average -= 1;
+      } else {
+        ratingStars += "☆";
+      }
+    }
+
+    return ratingStars;
+  } else {
+    return "☆☆☆☆☆";
+  }
+}
+
 export default function ProductCard({ product }: ProductCard) {
-  const [ratingAverageStars, setRatingAverageStars] = useState<null | string>(
-    null
-  );
-  const [ratingAverage, setRatingAverage] = useState<null | number>(null);
+  const [ratingStars, setRatingStars] = useState<null | string>(null);
+  const [reviewsCounter, setReviewsCounter] = useState<null | number>(null);
   const router = useRouter();
   const dispatch = useAppDispatch();
   const favoriteList = useAppSelector(
@@ -45,28 +66,9 @@ export default function ProductCard({ product }: ProductCard) {
 
   useEffect(() => {
     const allReviews = product.review;
-    setRatingAverage(allReviews.length);
+    setReviewsCounter(allReviews.length);
 
-    if (allReviews.length) {
-      let ratingStars = "";
-
-      let average =
-        allReviews.reduce((accum, curr) => accum + curr.rating, 0) /
-        allReviews.length;
-
-      for (let i = 0; i < 5; i++) {
-        if (average > 1) {
-          ratingStars += "★";
-          average -= 1;
-        } else {
-          ratingStars += "☆";
-        }
-      }
-
-      setRatingAverageStars(ratingStars);
-    } else {
-      setRatingAverageStars("☆☆☆☆☆");
-    }
+    setRatingStars(buildRatingStars(allReviews));
   }, []);
 
   return (
@@ -94,9 +96,9 @@ export default function ProductCard({ product }: ProductCard) {
             </p>
           )}
         </div>
-        <div className="flex space-x-[10px]">
-          <div>{ratingAverageStars}</div>
-          <div>{`(${ratingAverage})`}</div>
+        <div className="flex space-x-[5px]">
+          <div>{ratingStars}</div>
+          <div>{`(${reviewsCounter})`}</div>
         </div>
       </Link>
       <div className="flex items-center space-x-[10px] mt-[10px]">

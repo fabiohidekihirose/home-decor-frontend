@@ -22,6 +22,6 @@ export interface ItemCardProps {
   item: ProductProps;
 }
 
-interface ReviewProps {
+export interface ReviewProps {
   rating: number;
 }

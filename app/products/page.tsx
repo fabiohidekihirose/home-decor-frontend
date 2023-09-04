@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { addToCart } from "@/redux/slicers/cartSlice";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ProductProps, DepartmentProps } from "@/types";
 import ProductCard from "./components/ProductCard";
@@ -14,8 +12,6 @@ export default function ProductsPage() {
   const [currentDepartment, setCurrentDepartment] = useState("");
   const [currentDepartmentText, setCurrentDepartmentText] = useState("");
 
-  const dispatch = useAppDispatch();
-  const favorites = useAppSelector((state) => state.favoriteReducer.favorite);
   const router = useRouter();
   const searchParams = useSearchParams();
 

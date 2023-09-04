@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { addToCart } from "@/redux/slicers/cartSlice";
 import DiscountPrice from "@/components/DiscountPrice";
 import Image from "next/image";
+import { buildRatingStars } from "../components/ProductCard";
 
 export default function ProductPage({
   params,
@@ -29,6 +30,8 @@ export default function ProductPage({
     discount: 0,
     review: [],
   });
+  const [ratingStars, setRatingStars] = useState<null | string>(null);
+  const [reviewsCounter, setReviewsCounter] = useState<null | number>(null);
   const [similarProducts, setSimilarProducts] = useState([]);
   const [showLess, setShowLess] = useState(true);
   const [showButtonText, setShowButtonText] = useState("Show More");
@@ -53,6 +56,8 @@ export default function ProductPage({
           (product: ProductProps) => productData.data.id !== product.id
         )
       );
+      setRatingStars(buildRatingStars(productData.data.review));
+      setReviewsCounter(productData.data.review.length);
     })();
   }, []);
 
@@ -108,6 +113,10 @@ export default function ProductPage({
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             </p>
           )}
+          <div className="flex space-x-[5px]">
+            <div>{ratingStars}</div>
+            <div>{`(${reviewsCounter})`}</div>
+          </div>
           <p>FREE shipping</p>
           <div className="flex space-x-[20px] items-center">
             <div className="flex w-[20%]">
