@@ -8,13 +8,17 @@ import { ProductProps } from "@/types";
 import { useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { addToCart } from "@/redux/slicers/cartSlice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface ProductCard {
   product: ProductProps;
 }
 
 export default function ProductCard({ product }: ProductCard) {
+  const [ratingAverageStars, setRatingAverageStars] = useState<null | string>(
+    null
+  );
+  const [ratingAverage, setRatingAverage] = useState<null | number>(null);
   const router = useRouter();
   const dispatch = useAppDispatch();
   const favoriteList = useAppSelector(
@@ -39,11 +43,34 @@ export default function ProductCard({ product }: ProductCard) {
     }
   };
 
+  useEffect(() => {
+    const allReviews = product.review;
+    setRatingAverage(allReviews.length);
+
+    if (allReviews.length) {
+      let ratingStars = "";
+
+      let average =
+        allReviews.reduce((accum, curr) => accum + curr.rating, 0) /
+        allReviews.length;
+
+      for (let i = 0; i < 5; i++) {
+        if (average > 1) {
+          ratingStars += "★";
+          average -= 1;
+        } else {
+          ratingStars += "☆";
+        }
+      }
+
+      setRatingAverageStars(ratingStars);
+    } else {
+      setRatingAverageStars("☆☆☆☆☆");
+    }
+  }, []);
+
   return (
-    <div
-      key={product.id}
-      className="xl:w-[33.3%] md:w-1/2 h-auto border-[1px] p-4 rounded-[10px] border-[#ffffff] hover:border-[#9d9e9f] mb-[20px] hover:shadow-[0_4px_30px_rgba(157,157,157,0.25)]"
-    >
+    <div className="xl:w-[33.3%] md:w-1/2 h-auto border-[1px] p-4 rounded-[10px] border-[#ffffff] hover:border-[#9d9e9f] mb-[20px] hover:shadow-[0_4px_30px_rgba(157,157,157,0.25)]">
       <Link href={`products/${product.id}`}>
         <Image
           alt={product.name}
@@ -66,6 +93,10 @@ export default function ProductCard({ product }: ProductCard) {
               ¥{product?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             </p>
           )}
+        </div>
+        <div className="flex space-x-[10px]">
+          <div>{ratingAverageStars}</div>
+          <div>{`(${ratingAverage})`}</div>
         </div>
       </Link>
       <div className="flex items-center space-x-[10px] mt-[10px]">

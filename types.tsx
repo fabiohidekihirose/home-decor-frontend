@@ -8,6 +8,7 @@ export interface ProductProps {
   description: string;
   inCart: number;
   discount: number;
+  review: ReviewProps[];
 }
 
 export interface DepartmentProps {
@@ -19,4 +20,8 @@ export interface DepartmentProps {
 
 export interface ItemCardProps {
   item: ProductProps;
+}
+
+interface ReviewProps {
+  rating: number;
 }

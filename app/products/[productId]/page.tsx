@@ -27,6 +27,7 @@ export default function ProductPage({
     description: "",
     inCart: 0,
     discount: 0,
+    review: [],
   });
   const [similarProducts, setSimilarProducts] = useState([]);
   const [showLess, setShowLess] = useState(true);

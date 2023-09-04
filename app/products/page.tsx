@@ -119,7 +119,7 @@ export default function ProductsPage() {
         </p>
         <div className="w-full flex max-md:flex-col md:flex-wrap">
           {filteredProducts.map((product: ProductProps) => (
-            <ProductCard product={product} />
+            <ProductCard product={product} key={product.id} />
           ))}
         </div>
       </div>
