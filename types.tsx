@@ -23,5 +23,12 @@ export interface ItemCardProps {
 }
 
 export interface ReviewProps {
+  id: number;
+  user: UserProps;
+  comment: string;
   rating: number;
+}
+
+interface UserProps {
+  first_name: string;
 }

@@ -14,7 +14,7 @@ interface ProductCard {
   product: ProductProps;
 }
 
-export function buildRatingStars(allReviews: ReviewProps[]) {
+export function buildAverageRatingStars(allReviews: ReviewProps[]) {
   if (allReviews.length) {
     let ratingStars = "";
 
@@ -68,7 +68,7 @@ export default function ProductCard({ product }: ProductCard) {
     const allReviews = product.review;
     setReviewsCounter(allReviews.length);
 
-    setRatingStars(buildRatingStars(allReviews));
+    setRatingStars(buildAverageRatingStars(allReviews));
   }, []);
 
   return (

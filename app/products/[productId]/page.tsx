@@ -1,16 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import axios from "axios";
-import { BiCartAdd } from "react-icons/bi";
-import { ProductProps } from "@/types";
+import { ProductProps, ReviewProps } from "@/types";
 import { useAppDispatch } from "@/redux/hooks";
 import { useRouter } from "next/navigation";
 import { addToCart } from "@/redux/slicers/cartSlice";
 import DiscountPrice from "@/components/DiscountPrice";
 import Image from "next/image";
-import { buildRatingStars } from "../components/ProductCard";
+import { buildAverageRatingStars } from "../components/ProductCard";
+import ProductCard from "../components/ProductCard";
+import ReviewCard from "../components/ReviewCard";
 
 export default function ProductPage({
   params,
@@ -32,6 +32,7 @@ export default function ProductPage({
   });
   const [ratingStars, setRatingStars] = useState<null | string>(null);
   const [reviewsCounter, setReviewsCounter] = useState<null | number>(null);
+  const [reviews, setReviews] = useState([]);
   const [similarProducts, setSimilarProducts] = useState([]);
   const [showLess, setShowLess] = useState(true);
   const [showButtonText, setShowButtonText] = useState("Show More");
@@ -56,7 +57,8 @@ export default function ProductPage({
           (product: ProductProps) => productData.data.id !== product.id
         )
       );
-      setRatingStars(buildRatingStars(productData.data.review));
+      setReviews(productData.data.review);
+      setRatingStars(buildAverageRatingStars(productData.data.review));
       setReviewsCounter(productData.data.review.length);
     })();
   }, []);
@@ -160,40 +162,23 @@ export default function ProductPage({
       </div>
       <div className="space-y-[10px]">
         <h2 className="text-[24px] font-[600] text-[#000000]">
+          Rating & Reviews
+        </h2>
+        {reviews.length ? (
+          reviews.map((review: ReviewProps) => (
+            <ReviewCard review={review} key={review.id} />
+          ))
+        ) : (
+          <div>No reviews yet</div>
+        )}
+      </div>
+      <div className="space-y-[10px]">
+        <h2 className="text-[24px] font-[600] text-[#000000]">
           Compare Similar Items
         </h2>
         <div className="flex text-[#000000]">
           {similarProducts.map((product: ProductProps) => (
-            <Link
-              key={product.id}
-              href={`products/${product.id}`}
-              className="w-[25%] p-2 border-[1px] rounded-[10px] border-[#ffffff] hover:border-[#7f7f7f] mb-[20px]"
-            >
-              <Image
-                alt={product?.name}
-                src={product?.image}
-                width="0"
-                height="0"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 30vw, 15vw"
-                className="rounded-[10px] w-full h-auto"
-              ></Image>
-              <div className="pt-[10px]">
-                <p className="text-[20px]">{product.name}</p>
-                <p className="text-[24px]">
-                  ¥
-                  {product.price
-                    .toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                </p>
-              </div>
-              <button
-                className="flex items-center space-x-[10px] bg-[#30628B] text-[#ffffff] p-2 rounded-[10px] hover:bg-[#4186BE]"
-                onClick={() => addToCartHandler(product)}
-              >
-                <BiCartAdd></BiCartAdd>
-                <p>Add to cart</p>
-              </button>
-            </Link>
+            <ProductCard product={product} />
           ))}
         </div>
       </div>
