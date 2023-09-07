@@ -93,6 +93,7 @@ _Please note you will need to follow the steps found on [home-decor-backend](htt
 - Search by key words
 - Filter by department
 - Favorites
+- Rating and review
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
