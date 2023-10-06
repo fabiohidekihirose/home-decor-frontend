@@ -4,10 +4,12 @@ import { useAppSelector } from "@/redux/hooks";
 import { ProductProps } from "@/types";
 import CartItem from "./components/CartItemCard";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 export default function Cart() {
   const cartItems = useAppSelector((state) => state.cartReducer.cart);
   const router = useRouter();
+  const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
   const getTotal = () => {
     let totalItems = 0;
@@ -19,6 +21,15 @@ export default function Cart() {
     });
 
     return { totalItems, totalPrice };
+  };
+
+  const checkoutHandler = async () => {
+    try {
+      const url = await axios.post(baseURL + "/products/checkout", cartItems);
+      router.push(url.data);
+    } catch (error: any) {
+      console.log(error);
+    }
   };
 
   return (
@@ -44,9 +55,7 @@ export default function Cart() {
         </p>
         <button
           className="bg-[#30628b] text-[#ffffff] p-4 rounded-[10px] hover:bg-[#4186BE] w-full"
-          onClick={() => {
-            cartItems.length && router.push("/checkout");
-          }}
+          onClick={checkoutHandler}
         >
           Procedure to checkout
         </button>
