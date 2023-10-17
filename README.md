@@ -94,6 +94,7 @@ _Please note you will need to follow the steps found on [home-decor-backend](htt
 - Filter by department
 - Favorites
 - Rating and review
+- Connected with Stripe
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
